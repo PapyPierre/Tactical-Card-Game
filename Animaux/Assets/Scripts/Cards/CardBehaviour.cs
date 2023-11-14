@@ -1,12 +1,24 @@
-using System;
 using UnityEngine;
 
-public class CardBehaviour : MonoBehaviour
+namespace Cards
 {
-    public Action OnPose;
-
-    private void Start()
+    public class CardBehaviour : MonoBehaviour
     {
-        OnPose();
+        [SerializeField] protected CardData data;
+        
+        private void Start()
+        {
+            OnPose();
+        }
+
+        protected virtual void OnPose()
+        {
+            
+        }
+        
+        protected virtual void OnScoreCompute()
+        {
+            
+        }
     }
 }

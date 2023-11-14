@@ -19,6 +19,35 @@ namespace Cards
             Uninitialised,
         }
 
+        public enum CardBiomes
+        {
+            None,
+            Forest,
+        }
+        
+        public enum CardType
+        {
+            Animal, 
+            Place,
+        }
+
+        public enum CardCategory
+        {
+            None,
+            Predator,
+            FlyingAnimal, 
+            Prey,
+            Building,
+            NaturalPlace
+        }
+
+        public enum EffectType
+        {
+            score,
+            negate,
+            other
+        }
+
         public List<CardData> allCardsData;
     }
 }
