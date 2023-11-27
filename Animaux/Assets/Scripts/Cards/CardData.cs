@@ -20,7 +20,7 @@ namespace Cards
         public CardManager.EffectType effectType;
         
         [ShowIf("CheckIfScore")]
-        public int additionalScore;
+        public uint additionalScore;
         
         [ShowIf("CheckIfNegate")]
         public List<CardManager.CardCategory>  negatedCategory;

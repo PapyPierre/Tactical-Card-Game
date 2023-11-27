@@ -13,8 +13,11 @@ public class Player : MonoBehaviour
     public List<CardManager.Cards> cardsInHand = new ();
     
     [HideInInspector] public CardManager.Cards selectedCardInHand;
+    [HideInInspector] public bool hasPlayedACardThisTurn;
 
     public Color playerColor;
+
+    [HideInInspector] public uint numberOfPoints; 
 
     [HideInInspector] public bool isReadyToPlay;
 
@@ -70,10 +73,5 @@ public class Player : MonoBehaviour
         }
         
         isReadyToPlay = true;
-    }
-
-    public void FinishTurn()
-    {
-        GameManager.instance.EndOfTurn();
     }
 }

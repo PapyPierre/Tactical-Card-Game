@@ -50,6 +50,8 @@ namespace Board
         public void PlaceCard(Tile tile, CardManager.Cards card)
         {
             Player currentPlayer =  _gameManager.currentPlayingPlayer;
+
+            currentPlayer.hasPlayedACardThisTurn = true;
             
             currentPlayer.cardsInHand.Remove(currentPlayer.selectedCardInHand);
             UIManager.instance.ResetCardInHandColor();
@@ -57,12 +59,12 @@ namespace Board
             
             Vector3 tilePos = tile.transform.position;
             CardData cardData = CardManager.instance.allCardsData[(int) card];
-
-            if (cardData.prefab != null)
-            {
-                Instantiate(cardData.prefab, new Vector3(tilePos.x, 0.1f, tilePos.y), Quaternion.identity);
-            }
-
+            
+            Vector3 pos = new Vector3(tilePos.x, 0.1f, tilePos.y);
+            
+            var posedCard = Instantiate(cardData.prefab, pos, Quaternion.identity).GetComponent<CardBehaviour>(); 
+            posedCard.Init(tile, currentPlayer);
+            
             // For Debug, waiting for 3D models
             if (cardData.sprite != null)
             {
@@ -71,11 +73,25 @@ namespace Board
             }
             
             Vector2Int tileCoord = new Vector2Int((int) tilePos.x, (int) tilePos.z);
-            tileMatrix[tileCoord.x, tileCoord.y].cardDataOnThisTile = cardData;
+            tileMatrix[tileCoord.x, tileCoord.y].cardOnThisTile = posedCard;
+            CheckIfBoardIsFull();
+        }
 
-            if (!cardData.hasSpecialEffectOnPose)
+        private void CheckIfBoardIsFull()
+        {
+            uint occupiedTile = 0; 
+            
+            foreach (var tile in tileMatrix)
             {
-                currentPlayer.FinishTurn();
+                if (tile.cardOnThisTile)
+                {
+                    occupiedTile++;
+                }
+            }
+
+            if (occupiedTile >= boardSize * boardSize)
+            {
+                _gameManager.gameIsFinish = true;
             }
         }
     }

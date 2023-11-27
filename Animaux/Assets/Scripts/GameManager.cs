@@ -9,10 +9,10 @@ public class GameManager : Singleton<GameManager>
 
     private bool gameHasStarted;
     [HideInInspector] public int turnNumber;
+    [HideInInspector] public bool gameIsFinish;
 
     public Player[] players;
     [HideInInspector] public Player currentPlayingPlayer;
-
     
     private void Start()
     {
@@ -35,6 +35,11 @@ public class GameManager : Singleton<GameManager>
         {
             OnPlayerClick();
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            gameIsFinish = true;
+        }
     }
 
     private void OnPlayerClick()
@@ -50,17 +55,39 @@ public class GameManager : Singleton<GameManager>
         _boardManager.PlaceCard(selectedTile, currentPlayingPlayer.selectedCardInHand);
     }
 
-    public void EndOfTurn()
+    public void StartNextPlayerTurn()
     {
-        StartNextPlayerTurn();
-    }
-
-    private void StartNextPlayerTurn()
-    {
-        int currentIndex = Array.IndexOf(players, currentPlayingPlayer);
-        int nextIndex = (currentIndex + 1) % players.Length;
-        currentPlayingPlayer = players[nextIndex];
+        currentPlayingPlayer = NextPlayerToPlay();
 
         currentPlayingPlayer.StartTurn(turnNumber < 2);
+    }
+
+    public Player NextPlayerToPlay()
+    {
+        
+        int currentIndex = Array.IndexOf(players, currentPlayingPlayer);
+        int nextIndex = (currentIndex + 1) % players.Length;
+        return players[nextIndex];
+    }
+
+    public void ComputePoints()
+    {
+        foreach (var tile in _boardManager.tileMatrix)
+        {
+            tile.cardOnThisTile.OnScoreCompute();
+        }
+
+        if (players[0].numberOfPoints > players[1].numberOfPoints)
+        {
+            Debug.Log(players[0] + " win!");
+        }
+        else if (players[0].numberOfPoints < players[1].numberOfPoints)
+        {
+            Debug.Log(players[1] + " win!");
+        }
+        else
+        {
+            Debug.Log("Draw");
+        }
     }
 }

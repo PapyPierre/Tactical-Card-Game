@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82daa174a19be0a4ea7adecd50bf8bf9, type: 3}
-  m_Name: ForestData
+  m_Name: FarmData
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  sprite: {fileID: 0}
+  prefab: {fileID: 6076495314010119485, guid: e0cb1b2c15151e343b041ecec231ac99, type: 3}
+  sprite: {fileID: 21300000, guid: 4efba5e0a4ac22342a26bb78be9497c5, type: 3}
   hasSpecialEffectOnPose: 0
-  thisCard: 7
-  biome: 1
+  thisCard: 6
+  biome: 0
   type: 1
-  category: 5
+  category: 4
   effectType: 0
-  additionalScore: 1
-  negatedCategory: 0300000001000000
+  additionalScore: 5
+  negatedCategory: 

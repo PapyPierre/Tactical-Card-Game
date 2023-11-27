@@ -9,7 +9,7 @@ namespace UI
     {
         private GameManager _gameManager;
         private CardManager _cardManager;
-    
+        public SwitchTurnMenu switchTurnMenu;
         public List<Image> cardInHandSprite;
 
         private void Start()
@@ -38,6 +38,8 @@ namespace UI
         // Called from UI
         public void PlayCardInHand(int i)
         {
+            if (_gameManager.currentPlayingPlayer.hasPlayedACardThisTurn) return;
+            
             _gameManager.currentPlayingPlayer.SelectCardInHand(i);
 
             ResetCardInHandColor();
@@ -50,6 +52,18 @@ namespace UI
             foreach (var image in cardInHandSprite)
             { 
                 image.color = Color.white;   
+            }
+        }
+        
+        public void EndOfTurn()
+        {
+            if (_gameManager.gameIsFinish)
+            {
+                _gameManager.ComputePoints();
+            }
+            else
+            {
+                switchTurnMenu.Show(_gameManager.NextPlayerToPlay());
             }
         }
     }

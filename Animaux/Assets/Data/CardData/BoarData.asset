@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82daa174a19be0a4ea7adecd50bf8bf9, type: 3}
+  m_Name: BoarData
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6830184392909621533, guid: 098b5a0ff432e3f48a99b2cd683411dc, type: 3}
+  sprite: {fileID: 21300000, guid: d77752f822a47e545999a523ea1ba465, type: 3}
+  hasSpecialEffectOnPose: 0
+  thisCard: 4
+  biome: 1
+  type: 0
+  category: 0
+  effectType: 1
+  additionalScore: 0
+  negatedCategory: 0400000005000000
