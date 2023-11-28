@@ -8,7 +8,7 @@ namespace Cards
     public class CardBehaviour : MonoBehaviour
     {
         [Expandable] public CardData data;
-        [HideInInspector] public List<CardBehaviour> isNegateBy = new ();
+        private readonly List<CardBehaviour> isNegateBy = new ();
         [HideInInspector] public Tile myTile;
         internal Player owner;
 
@@ -29,7 +29,7 @@ namespace Cards
             if (isNegateBy.Count > 0) return;
         }
         
-        protected void NegateAdjacentTiles()
+        protected void NegateAdjacentCards()
         {
             if (data.effectType != CardManager.EffectType.negate)
             {
@@ -43,9 +43,15 @@ namespace Cards
                 
                 if (data.negatedCategory.Contains(tile.cardOnThisTile.data.category))
                 {
-                    tile.cardOnThisTile.isNegateBy.Add(this);
+                    tile.cardOnThisTile.Negate(this);
                 }
             }
+        }
+
+        protected void Negate(CardBehaviour cardIsNegatesBy)
+        {
+            isNegateBy.Add(cardIsNegatesBy);
+            myTile.overlapSR.enabled = true;
         }
 
         protected void AddScoreToPlayer(Player player, uint score)

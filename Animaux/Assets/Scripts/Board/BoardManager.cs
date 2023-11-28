@@ -70,8 +70,8 @@ namespace Board
             // For Debug, waiting for 3D models
             if (cardData.sprite)
             {
-                tile.spriteRenderer.sprite = cardData.sprite;
-                tile.spriteRenderer.color = currentPlayer.playerColor;
+                tile.baseSR.sprite = cardData.sprite;
+                tile.baseSR.color = currentPlayer.playerColor;
             }
             
             Vector2Int tileCoord = new Vector2Int((int) tilePos.x, (int) tilePos.z);

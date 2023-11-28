@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Cards;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,6 +14,7 @@ namespace UI
         public CardInfoDisplayer cardInfoDisplayer;
         public List<Image> cardInHandSprite;
         public List<CardInHandDisplay> cardInHandDisplays = new ();
+        public TextMeshProUGUI turnNumberTMP;
 
         private void Start()
         {

@@ -25,6 +25,40 @@ public static class Helpers
 
         return adjacentTile;
     }
+    
+    public static List<Tile> WhichIs(this List<Tile> tiles, CardManager.Cards card)
+    {
+        List<Tile> tileHavingTheCardOn = new List<Tile>();
+
+        foreach (var tile in tiles)
+        {
+            if (!tile.cardOnThisTile) continue;
+            
+            if (tile.cardOnThisTile.data.thisCard == card)
+            {
+                tileHavingTheCardOn.Add(tile);
+            }
+        }
+        
+        return tileHavingTheCardOn;
+    }
+    
+    public static List<Tile> WhichIs(this List<Tile> tiles, CardManager.CardBiomes biome)
+    {
+        List<Tile> tileBeingThisBiome = new List<Tile>();
+
+        foreach (var tile in tiles)
+        {
+            if (!tile.cardOnThisTile) continue;
+            
+            if (tile.cardOnThisTile.data.biome == biome)
+            {
+                tileBeingThisBiome.Add(tile);
+            }
+        }
+        
+        return tileBeingThisBiome;
+    }
 
     public static List<Tile> GetAllLinkedGivenCard(this Tile startTile, CardManager.Cards givenCard)
     {

@@ -1,6 +1,6 @@
 ﻿namespace Cards.Card_Behaviour.Animals_Behaviour
 {
-    public class OwlBehaviour : CardBehaviour
+    public class OwlBehaviour : AnimalBehaviour
     {
         public override void OnScoreCompute()
         {
@@ -8,9 +8,9 @@
 
             uint scoreToAdd = 0;
 
-            var linkedForests = myTile.GetAllLinkedGivenCard(CardManager.Cards.Forest);
+            int linkedForestsCount = myTile.GetAllLinkedGivenCard(CardManager.Cards.Forest).Count;
             
-            for (var index = 0; index < linkedForests.Count; index++)
+            for (var index = 0; index < linkedForestsCount; index++)
             {
                 scoreToAdd += data.additionalScore;
             }

@@ -11,7 +11,20 @@ public class GameManager : Singleton<GameManager>
     private UIManager _uiManager;
 
     private bool gameHasStarted;
-    [HideInInspector] public int turnNumber;
+    
+    private int turnNumber;
+
+    public int TurnNumber
+    {
+        get => turnNumber;
+
+        set
+        {
+            turnNumber = value;
+            _uiManager.turnNumberTMP.text = "Turn " + value;
+        }
+    }
+    
     [HideInInspector] public bool gameIsFinish;
 
     public Player[] players;
@@ -75,7 +88,7 @@ public class GameManager : Singleton<GameManager>
     {
         currentPlayer = NextPlayerToPlay();
 
-        currentPlayer.StartTurn(turnNumber < 2);
+        currentPlayer.StartTurn(TurnNumber < 2);
     }
 
     private Player NextPlayerToPlay()

@@ -1,6 +1,6 @@
 ﻿namespace Cards.Card_Behaviour.Animals_Behaviour
 {
-    public class SquirrelBehaviour : CardBehaviour
+    public class SquirrelBehaviour : AnimalBehaviour
     {
         public override void OnScoreCompute()
         {
@@ -11,9 +11,9 @@
             // Get point for himself AND for all linked squirrels
             scoreToAdd += data.additionalScore;
 
-            var linkedSquirrels = myTile.GetAllLinkedGivenCard(CardManager.Cards.Squirrel);
+            int linkedSquirrelsCount = myTile.GetAllLinkedGivenCard(CardManager.Cards.Squirrel).Count;
             
-            for (int i = 0; i < linkedSquirrels.Count; i++)
+            for (int i = 0; i < linkedSquirrelsCount; i++)
             {
                 scoreToAdd += data.additionalScore;
             }

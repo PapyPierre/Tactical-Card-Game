@@ -1,13 +1,16 @@
 using Cards;
 using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Board
 {
    public class Tile : MonoBehaviour
    {
-      private MeshRenderer _meshRenderer;
-      public SpriteRenderer spriteRenderer;
+      private MeshRenderer _meshRenderer; 
+      public SpriteRenderer baseSR;
+      public SpriteRenderer overlapSR;
+
       [SerializeField] private Material baseMat;
       [SerializeField] private Material overMat;
    

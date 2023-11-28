@@ -2,18 +2,15 @@
 
 namespace Cards.Card_Behaviour.Location_Behaviour
 {
-    public class ForestBehaviour : CardBehaviour
+    public class ForestBehaviour : LocationBehaviour
     {
         protected override void OnPose()
         {
-            foreach (var tile in myTile.AdjacentTile())
+            base.OnPose();
+            
+            foreach (var tile in myTile.AdjacentTile().WhichIs(CardManager.Cards.Deer))
             {
-                if (!tile.cardOnThisTile) continue;
-                
-                if (tile.cardOnThisTile.data.thisCard == CardManager.Cards.Deer)
-                {
-                    tile.cardOnThisTile.GetComponent<DeerBehaviour>().CheckForWin();
-                }
+                tile.cardOnThisTile.GetComponent<DeerBehaviour>().CheckForWin();
             }
         }
         
@@ -23,12 +20,10 @@ namespace Cards.Card_Behaviour.Location_Behaviour
 
             uint scoreToAdd = 0;
             
-            foreach (var tile in myTile.AdjacentTile())
+            foreach (var tile in myTile.AdjacentTile().WhichIs(CardManager.CardBiomes.Forest))
             {
-                if (!tile.cardOnThisTile) continue;
-                
-                if (tile.cardOnThisTile.data.biome == CardManager.CardBiomes.Forest 
-                    && tile.cardOnThisTile.data.type == CardManager.CardType.Animal)
+                // Si c'est aussi un animal
+                if (tile.cardOnThisTile.data.type == CardManager.CardType.Animal)
                 {
                     scoreToAdd += data.additionalScore;
                 }

@@ -1,9 +1,11 @@
 ﻿namespace Cards.Card_Behaviour.Animals_Behaviour
 {
-    public class DeerBehaviour : CardBehaviour
+    public class DeerBehaviour : AnimalBehaviour
     {
         protected override void OnPose()
         {
+            base.OnPose();
+
             CheckForWin();
         }
 
@@ -19,16 +21,13 @@
         {
             int adjacentForestIndex = 0;
 
-            foreach (var tile in myTile.AdjacentTile())
-            {
-                if (!tile.cardOnThisTile) continue;
-
-                if (tile.cardOnThisTile.data.thisCard == CardManager.Cards.Forest)
-                {
-                    adjacentForestIndex++;
-                }
-            }
+            int adjacentForestCount = myTile.AdjacentTile().WhichIs(CardManager.Cards.Forest).Count;
             
+            for (var index = 0; index < adjacentForestCount; index++)
+            {
+                adjacentForestIndex++;
+            }
+
             return adjacentForestIndex == 4;
         }
 

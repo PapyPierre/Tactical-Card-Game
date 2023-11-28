@@ -8,7 +8,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     private UIManager _uiManager;
-    
+    private GameManager _gameManager;
+        
     [SerializeField, Expandable] private DeckList deckList;
     
     [SerializeField]
@@ -29,6 +30,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         _uiManager = UIManager.instance;
+        _gameManager = GameManager.instance;
         selectedCardInHand = CardManager.Cards.Uninitialised;
         Init();
     }
@@ -66,13 +68,13 @@ public class Player : MonoBehaviour
         {
             cardInHand.isLocked = false;
         }
-
+        
         _uiManager.cardInHandDisplays[i].isLocked = true;
     }
     
     public void StartTurn(bool isFirstPlayerTurn)
     {
-        GameManager.instance.turnNumber++;
+        _gameManager.TurnNumber++;
         
         if (isFirstPlayerTurn)
         {

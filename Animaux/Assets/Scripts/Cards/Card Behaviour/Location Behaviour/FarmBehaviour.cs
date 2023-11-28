@@ -1,6 +1,6 @@
 ﻿namespace Cards.Card_Behaviour.Location_Behaviour
 {
-    public class FarmBehaviour : CardBehaviour
+    public class FarmBehaviour : LocationBehaviour
     {
         public override void OnScoreCompute()
         {
