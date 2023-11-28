@@ -1,16 +1,16 @@
 using System.Collections.Generic;
 using Board;
+using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Cards
 {
     public class CardBehaviour : MonoBehaviour
     {
-        public CardData data;
+        [Expandable] public CardData data;
         [HideInInspector] public List<CardBehaviour> isNegateBy = new ();
         [HideInInspector] public Tile myTile;
-        protected Player owner;
+        internal Player owner;
 
         public void Init(Tile posedOnTile, Player cardOwner)
         {
@@ -29,7 +29,7 @@ namespace Cards
             if (isNegateBy.Count > 0) return;
         }
         
-        protected void NegateAdjacenteTiles()
+        protected void NegateAdjacentTiles()
         {
             if (data.effectType != CardManager.EffectType.negate)
             {
@@ -48,9 +48,9 @@ namespace Cards
             }
         }
 
-        protected void AddScoreToOwner(uint score)
+        protected void AddScoreToPlayer(Player player, uint score)
         {
-            owner.numberOfPoints += score;
+            player.numberOfPoints += score;
             //TODO zoli vfx de tess
         }
     }

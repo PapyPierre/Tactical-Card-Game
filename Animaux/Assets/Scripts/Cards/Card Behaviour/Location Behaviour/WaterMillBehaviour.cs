@@ -12,13 +12,13 @@
             {
                 if (!tile.cardOnThisTile) continue;
                 
-                if (tile.cardOnThisTile.data.thisCard == CardManager.Cards.Lake)
+                if (tile.cardOnThisTile.data.biome == CardManager.CardBiomes.Aquatic)
                 {
                     scoreToAdd += data.additionalScore;
                 }
             }   
             
-            AddScoreToOwner(scoreToAdd);
+            AddScoreToPlayer(owner, scoreToAdd);
         }
     }
 }

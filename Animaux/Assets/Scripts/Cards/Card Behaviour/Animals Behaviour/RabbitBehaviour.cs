@@ -1,10 +1,10 @@
 ﻿namespace Cards.Card_Behaviour.Animals_Behaviour
 {
-    public class BoarBehaviour : CardBehaviour
+    public class RabbitBehaviour : CardBehaviour
     {
         protected override void OnPose()
         {
-            NegateAdjacentTiles();
+            
         }
     }
 }

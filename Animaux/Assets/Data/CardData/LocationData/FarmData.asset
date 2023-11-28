@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82daa174a19be0a4ea7adecd50bf8bf9, type: 3}
+  m_Name: FarmData
+  m_EditorClassIdentifier: 
+  prefab: {fileID: 6076495314010119485, guid: e0cb1b2c15151e343b041ecec231ac99, type: 3}
+  sprite: {fileID: 21300000, guid: 4efba5e0a4ac22342a26bb78be9497c5, type: 3}
+  thisCard: 5
+  biome: 3
+  type: 1
+  category: 4
+  effectType: 0
+  cardFullName: Farm
+  cardEffect: Score 5
+  cardDescription: Classic european farm
+  additionalScore: 5
+  negatedCategory: 

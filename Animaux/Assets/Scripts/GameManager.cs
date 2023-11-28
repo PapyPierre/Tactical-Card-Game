@@ -1,42 +1,47 @@
 ﻿using System;
 using Board;
 using Cards;
+using UI;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : Singleton<GameManager>
 {
     private BoardManager _boardManager;
+    private UIManager _uiManager;
 
     private bool gameHasStarted;
     [HideInInspector] public int turnNumber;
     [HideInInspector] public bool gameIsFinish;
 
     public Player[] players;
-    [HideInInspector] public Player currentPlayingPlayer;
+    [FormerlySerializedAs("currentPlayingPlayer")] [HideInInspector] public Player currentPlayer;
     
     private void Start()
     {
         _boardManager = BoardManager.instance;
+        _uiManager = UIManager.instance;
     }
     
     public void StartGame()
     {
         _boardManager.Init();
-        currentPlayingPlayer = players[0];
-        currentPlayingPlayer.StartTurn(true);
+        currentPlayer = players[0];
+        currentPlayer.StartTurn(true);
         gameHasStarted = true;
+        gameIsFinish = false;
     }
     
     private void Update()
     {
         if (!gameHasStarted) return;
        
-        if (Input.GetMouseButtonDown(0) && currentPlayingPlayer.isReadyToPlay)
+        if (Input.GetMouseButtonDown(0) && currentPlayer.isReadyToPlay)
         {
             OnPlayerClick();
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.F))
         {
             gameIsFinish = true;
         }
@@ -46,35 +51,63 @@ public class GameManager : Singleton<GameManager>
     {
         if (_boardManager.mouseOverThisTile == null) return;
         
-        if (currentPlayingPlayer.selectedCardInHand == CardManager.Cards.Uninitialised) return;
+        if (currentPlayer.selectedCardInHand == CardManager.Cards.Uninitialised) return;
 
         Tile selectedTile = _boardManager.mouseOverThisTile;
 
         if (!selectedTile.IsLegalMove()) return;
         
-        _boardManager.PlaceCard(selectedTile, currentPlayingPlayer.selectedCardInHand);
+        _boardManager.PlaceCard(selectedTile, currentPlayer.selectedCardInHand);
+    }
+    
+    // Called from UI
+    public void PlayCardInHand(int i)
+    {
+        if (currentPlayer.hasPlayedACardThisTurn) return;
+            
+        currentPlayer.SelectCardInHand(i);
+
+        _uiManager.ResetCardInHandColor();
+        _uiManager.cardInHandSprite[i].color = currentPlayer.playerColor;
     }
 
     public void StartNextPlayerTurn()
     {
-        currentPlayingPlayer = NextPlayerToPlay();
+        currentPlayer = NextPlayerToPlay();
 
-        currentPlayingPlayer.StartTurn(turnNumber < 2);
+        currentPlayer.StartTurn(turnNumber < 2);
     }
 
-    public Player NextPlayerToPlay()
+    private Player NextPlayerToPlay()
     {
-        
-        int currentIndex = Array.IndexOf(players, currentPlayingPlayer);
+        int currentIndex = Array.IndexOf(players, currentPlayer);
         int nextIndex = (currentIndex + 1) % players.Length;
         return players[nextIndex];
     }
-
-    public void ComputePoints()
+    
+    // Called from UI
+    public void EndOfTurn()
     {
+        if (gameIsFinish)
+        {
+            ComputePoints();
+        }
+        else
+        {
+            _uiManager.switchTurnMenu.Show(NextPlayerToPlay());
+        }
+    }
+
+    private void ComputePoints()
+    {
+        Debug.Log(0);
+        
         foreach (var tile in _boardManager.tileMatrix)
         {
-            tile.cardOnThisTile.OnScoreCompute();
+            if (tile.cardOnThisTile)
+            {
+                tile.cardOnThisTile.OnScoreCompute();
+            }
         }
 
         if (players[0].numberOfPoints > players[1].numberOfPoints)

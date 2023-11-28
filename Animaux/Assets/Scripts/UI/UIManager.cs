@@ -10,7 +10,9 @@ namespace UI
         private GameManager _gameManager;
         private CardManager _cardManager;
         public SwitchTurnMenu switchTurnMenu;
+        public CardInfoDisplayer cardInfoDisplayer;
         public List<Image> cardInHandSprite;
+        public List<CardInHandDisplay> cardInHandDisplays = new ();
 
         private void Start()
         {
@@ -25,26 +27,14 @@ namespace UI
                 image.gameObject.SetActive(false);
             }
             
-            for (var i = 0; i < _gameManager.currentPlayingPlayer.cardsInHand.Count; i++)
+            for (var i = 0; i < _gameManager.currentPlayer.cardsInHand.Count; i++)
             {
-                var image = cardInHandSprite[i];
+                Image image = cardInHandSprite[i];
                 image.gameObject.SetActive(true);
-                var cardIndex = (int) _gameManager.currentPlayingPlayer.cardsInHand[i];
+                var cardIndex = (int) _gameManager.currentPlayer.cardsInHand[i];
                 Sprite newSprite = _cardManager.allCardsData[cardIndex].sprite;
                 image.sprite = newSprite;
             }
-        }
-    
-        // Called from UI
-        public void PlayCardInHand(int i)
-        {
-            if (_gameManager.currentPlayingPlayer.hasPlayedACardThisTurn) return;
-            
-            _gameManager.currentPlayingPlayer.SelectCardInHand(i);
-
-            ResetCardInHandColor();
-            
-            cardInHandSprite[i].color = _gameManager.currentPlayingPlayer.playerColor;
         }
 
         public void ResetCardInHandColor()
@@ -52,18 +42,6 @@ namespace UI
             foreach (var image in cardInHandSprite)
             { 
                 image.color = Color.white;   
-            }
-        }
-        
-        public void EndOfTurn()
-        {
-            if (_gameManager.gameIsFinish)
-            {
-                _gameManager.ComputePoints();
-            }
-            else
-            {
-                switchTurnMenu.Show(_gameManager.NextPlayerToPlay());
             }
         }
     }

@@ -10,7 +10,6 @@ namespace Cards
         [Header("Meta Data")]
         public GameObject prefab;
         public Sprite sprite;
-        public bool hasSpecialEffectOnPose;
         
         [Header("Card Data")]
         public CardManager.Cards thisCard;
@@ -18,11 +17,16 @@ namespace Cards
         public CardManager.CardType type;
         public CardManager.CardCategory category;
         public CardManager.EffectType effectType;
-        
-        [ShowIf("CheckIfScore")]
+
+        [Header("UI Info Data")] 
+        public string cardFullName;
+        [TextArea] public string cardEffect;
+        [TextArea] public string cardDescription;
+
+        [ShowIf("CheckIfScore"), Space]
         public uint additionalScore;
         
-        [ShowIf("CheckIfNegate")]
+        [ShowIf("CheckIfNegate"), Space]
         public List<CardManager.CardCategory>  negatedCategory;
 
         private bool CheckIfScore()

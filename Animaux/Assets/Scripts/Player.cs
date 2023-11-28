@@ -2,11 +2,16 @@
 using Cards;
 using NaughtyAttributes;
 using UI;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private UIManager _uiManager;
+    
     [SerializeField, Expandable] private DeckList deckList;
+    
+    [SerializeField]
     private List<CardManager.Cards> deck = new ();
     
     // Serialised for debug
@@ -23,6 +28,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        _uiManager = UIManager.instance;
         selectedCardInHand = CardManager.Cards.Uninitialised;
         Init();
     }
@@ -45,15 +51,23 @@ public class Player : MonoBehaviour
             return;
         }
         
-        CardManager.Cards cardToDraw = deck[^1];
-        cardsInHand.Add(cardToDraw);
-        deck.Remove(cardToDraw);
-        UIManager.instance.UpdateCardInHandSprites();
+        cardsInHand.Add(deck[0]);
+        deck.RemoveAt(0);
+        _uiManager.UpdateCardInHandSprites();
     }
 
     public void SelectCardInHand(int i)
     {
         selectedCardInHand = cardsInHand[i];
+        
+        _uiManager.cardInfoDisplayer.ShowCardInfoDisplay(cardsInHand[i]);
+
+        foreach (var cardInHand in _uiManager.cardInHandDisplays)
+        {
+            cardInHand.isLocked = false;
+        }
+
+        _uiManager.cardInHandDisplays[i].isLocked = true;
     }
     
     public void StartTurn(bool isFirstPlayerTurn)

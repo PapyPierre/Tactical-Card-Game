@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Board;
 using Cards;
 using UnityEngine;
@@ -12,19 +11,17 @@ public static class Helpers
 
         List<Tile> adjacentTile = new List<Tile>();
 
-        //TODO vérifié les bords
-
         // Above
-        adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x, (int)tilePos.z + 1]);
+        if (tilePos.z < 6) adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x, (int)tilePos.z + 1]);
 
         // Left
-        adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x - 1, (int)tilePos.z]);
+        if (tilePos.x > 0) adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x - 1, (int)tilePos.z]);
 
         // Right
-        adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x + 1, (int)tilePos.z]);
+        if (tilePos.x < 6) adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x + 1, (int)tilePos.z]);
 
         // Below
-        adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x, (int)tilePos.z - 1]);
+        if (tilePos.z > 0) adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x, (int)tilePos.z - 1]);
 
         return adjacentTile;
     }

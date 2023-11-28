@@ -1,7 +1,22 @@
-﻿namespace Cards.Card_Behaviour.Location_Behaviour
+﻿using Cards.Card_Behaviour.Animals_Behaviour;
+
+namespace Cards.Card_Behaviour.Location_Behaviour
 {
     public class ForestBehaviour : CardBehaviour
     {
+        protected override void OnPose()
+        {
+            foreach (var tile in myTile.AdjacentTile())
+            {
+                if (!tile.cardOnThisTile) continue;
+                
+                if (tile.cardOnThisTile.data.thisCard == CardManager.Cards.Deer)
+                {
+                    tile.cardOnThisTile.GetComponent<DeerBehaviour>().CheckForWin();
+                }
+            }
+        }
+        
         public override void OnScoreCompute()
         {
             base.OnScoreCompute();
@@ -19,7 +34,7 @@
                 }
             }   
             
-            AddScoreToOwner(scoreToAdd);
+            AddScoreToPlayer(owner, scoreToAdd);
         }
     }
 }

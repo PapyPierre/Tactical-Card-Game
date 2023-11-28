@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82daa174a19be0a4ea7adecd50bf8bf9, type: 3}
-  m_Name: LakeData
+  m_Name: DeerData
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6902327439516980030, guid: 92c4381eb0b676448b499391f7a0ce9e, type: 3}
-  sprite: {fileID: 21300000, guid: c85b822f1c9d04d4194bb14b8092db97, type: 3}
-  hasSpecialEffectOnPose: 0
-  thisCard: 8
-  biome: 0
-  type: 1
-  category: 5
+  prefab: {fileID: 5046056188568474421, guid: 76aed2664ad017e4db1d06df7f3eb781, type: 3}
+  sprite: {fileID: 21300000, guid: 513e6d9b82f2e9446af3117fb8dcc62a, type: 3}
+  thisCard: 2
+  biome: 1
+  type: 0
+  category: 3
   effectType: 2
+  cardFullName: Red Deer
+  cardEffect: Instantly win the game if the deer is surrounded by forests
+  cardDescription: description...
   additionalScore: 0
   negatedCategory: 

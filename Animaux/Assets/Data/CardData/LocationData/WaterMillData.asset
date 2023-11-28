@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82daa174a19be0a4ea7adecd50bf8bf9, type: 3}
-  m_Name: FarmData
+  m_Name: WaterMillData
   m_EditorClassIdentifier: 
-  prefab: {fileID: 6076495314010119485, guid: e0cb1b2c15151e343b041ecec231ac99, type: 3}
-  sprite: {fileID: 21300000, guid: 4efba5e0a4ac22342a26bb78be9497c5, type: 3}
-  hasSpecialEffectOnPose: 0
-  thisCard: 6
-  biome: 0
+  prefab: {fileID: 743645092631948045, guid: e84c2f32baeec87479ebef3855b0b74b, type: 3}
+  sprite: {fileID: 21300000, guid: a2e2f49c0b9d5ae4aaaff58dfda069b1, type: 3}
+  thisCard: 8
+  biome: 3
   type: 1
   category: 4
   effectType: 0
-  additionalScore: 5
+  cardFullName: Water Mill
+  cardEffect: Score 3 for each adjacent lake
+  cardDescription: Use water to make energy
+  additionalScore: 3
   negatedCategory: 

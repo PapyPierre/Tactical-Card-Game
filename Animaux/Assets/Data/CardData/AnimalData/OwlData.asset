@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82daa174a19be0a4ea7adecd50bf8bf9, type: 3}
-  m_Name: WaterMillData
+  m_Name: OwlData
   m_EditorClassIdentifier: 
-  prefab: {fileID: 743645092631948045, guid: e84c2f32baeec87479ebef3855b0b74b, type: 3}
-  sprite: {fileID: 21300000, guid: a2e2f49c0b9d5ae4aaaff58dfda069b1, type: 3}
-  hasSpecialEffectOnPose: 0
-  thisCard: 9
-  biome: 0
-  type: 1
-  category: 4
+  prefab: {fileID: 9074656933832981078, guid: 5d3bd19accc136f4694eab6f169188e9, type: 3}
+  sprite: {fileID: 21300000, guid: 407b171c793bf1c4c8e42a164d93365d, type: 3}
+  thisCard: 1
+  biome: 1
+  type: 0
+  category: 2
   effectType: 0
-  additionalScore: 3
+  cardFullName: Tawny Owl
+  cardEffect: Score 1 for each linked forest
+  cardDescription: description...
+  additionalScore: 1
   negatedCategory: 

@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Cards;
 using UI;
@@ -13,9 +12,9 @@ namespace Board
         [HideInInspector] public Tile mouseOverThisTile;
 
         [SerializeField] private GameObject tilePrefab;
-
-        private const int boardSize = 7;
-        public readonly Tile[,] tileMatrix= new Tile[boardSize, boardSize];
+        
+        public const int boardSize = 7;
+        public readonly Tile[,] tileMatrix = new Tile[boardSize, boardSize];
     
         private readonly List<Tile> legalMoves = new ();
         private bool lastTurnWasSkipped;
@@ -49,11 +48,14 @@ namespace Board
 
         public void PlaceCard(Tile tile, CardManager.Cards card)
         {
-            Player currentPlayer =  _gameManager.currentPlayingPlayer;
+            UIManager.instance.cardInfoDisplayer.HideCardInfoDisplay();
+            
+            Player currentPlayer =  _gameManager.currentPlayer;
 
             currentPlayer.hasPlayedACardThisTurn = true;
             
             currentPlayer.cardsInHand.Remove(currentPlayer.selectedCardInHand);
+            UIManager.instance.UpdateCardInHandSprites();
             UIManager.instance.ResetCardInHandColor();
             currentPlayer.selectedCardInHand = CardManager.Cards.Uninitialised;
             
@@ -66,7 +68,7 @@ namespace Board
             posedCard.Init(tile, currentPlayer);
             
             // For Debug, waiting for 3D models
-            if (cardData.sprite != null)
+            if (cardData.sprite)
             {
                 tile.spriteRenderer.sprite = cardData.sprite;
                 tile.spriteRenderer.color = currentPlayer.playerColor;

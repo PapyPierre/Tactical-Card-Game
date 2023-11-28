@@ -5,7 +5,7 @@
         public override void OnScoreCompute()
         {
             base.OnScoreCompute();
-            AddScoreToOwner(data.additionalScore);
+            AddScoreToPlayer(owner, data.additionalScore);
         }
     }
 }
