@@ -4,12 +4,12 @@
     {
         protected override void OnPose()
         {
-            base.OnPose();
-
             foreach (var tile in myTile.AdjacentTile().WhichIs(CardManager.Cards.Boar))
             {
                 Negate(tile.cardOnThisTile);
             }
+            
+            base.OnPose();
         }
     }
 }

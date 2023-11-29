@@ -23,8 +23,7 @@ namespace Cards
         [TextArea] public string cardEffect;
         [TextArea] public string cardDescription;
 
-        [ShowIf("CheckIfScore"), Space]
-        public uint additionalScore;
+        [ShowIf("CheckIfScore"), Space] public uint pointsValue;
         
         [ShowIf("CheckIfNegate"), Space]
         public List<CardManager.CardCategory>  negatedCategory;

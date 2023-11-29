@@ -4,9 +4,8 @@
     {
         protected override void OnPose()
         {           
-            base.OnPose();
-
             NegateAdjacentCards();
+            base.OnPose();
         }
     }
 }

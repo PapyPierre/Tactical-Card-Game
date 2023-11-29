@@ -2,23 +2,23 @@
 {
     public class SquirrelBehaviour : AnimalBehaviour
     {
-        public override void OnScoreCompute()
+        public override uint CurrentPointsValue()
         {
-            base.OnScoreCompute();
+            uint pointsValue = 0;
 
-            uint scoreToAdd = 0;
-            
             // Get point for himself AND for all linked squirrels
-            scoreToAdd += data.additionalScore;
+            pointsValue += data.pointsValue;
 
             int linkedSquirrelsCount = myTile.GetAllLinkedGivenCard(CardManager.Cards.Squirrel).Count;
-            
+
             for (int i = 0; i < linkedSquirrelsCount; i++)
             {
-                scoreToAdd += data.additionalScore;
+                pointsValue += data.pointsValue;
             }
-            
-            AddScoreToPlayer(owner, scoreToAdd);
+
+            currentPointsValue = pointsValue;
+
+            return base.CurrentPointsValue();
         }
     }
 }

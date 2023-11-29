@@ -6,30 +6,29 @@ namespace Cards.Card_Behaviour.Location_Behaviour
     {
         protected override void OnPose()
         {
-            base.OnPose();
-            
             foreach (var tile in myTile.AdjacentTile().WhichIs(CardManager.Cards.Deer))
             {
                 tile.cardOnThisTile.GetComponent<DeerBehaviour>().CheckForWin();
             }
-        }
-        
-        public override void OnScoreCompute()
-        {
-            base.OnScoreCompute();
-
-            uint scoreToAdd = 0;
             
+            base.OnPose();
+        }
+
+        public override uint CurrentPointsValue()
+        {
+            uint pointsValue = 0;
+
             foreach (var tile in myTile.AdjacentTile().WhichIs(CardManager.CardBiomes.Forest))
             {
                 // Si c'est aussi un animal
                 if (tile.cardOnThisTile.data.type == CardManager.CardType.Animal)
                 {
-                    scoreToAdd += data.additionalScore;
+                    pointsValue += data.pointsValue;
                 }
-            }   
-            
-            AddScoreToPlayer(owner, scoreToAdd);
+            }
+
+            currentPointsValue = pointsValue;
+            return base.CurrentPointsValue();
         }
     }
 }

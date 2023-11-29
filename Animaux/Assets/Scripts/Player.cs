@@ -4,6 +4,7 @@ using NaughtyAttributes;
 using UI;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
@@ -21,10 +22,11 @@ public class Player : MonoBehaviour
     [HideInInspector] public CardManager.Cards selectedCardInHand;
     [HideInInspector] public bool hasPlayedACardThisTurn;
 
+    public int playerIndex;
     public Color playerColor;
 
-    [HideInInspector] public uint numberOfPoints; 
-
+    [HideInInspector] public uint currentPoints;
+    
     [HideInInspector] public bool isReadyToPlay;
 
     private void Start()
@@ -50,6 +52,7 @@ public class Player : MonoBehaviour
         if (deck.Count <= 0)
         {
             Debug.Log("no card left in the deck");
+            _gameManager.gameIsFinish = true;
             return;
         }
         

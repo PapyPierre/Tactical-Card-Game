@@ -20,7 +20,7 @@ MonoBehaviour:
   category: 4
   effectType: 0
   cardFullName: Water Mill
-  cardEffect: Score 3 for each adjacent lake
+  cardEffect: Score 4 for each adjacent lake
   cardDescription: Use water to make energy
-  additionalScore: 3
+  pointsValue: 4
   negatedCategory: 

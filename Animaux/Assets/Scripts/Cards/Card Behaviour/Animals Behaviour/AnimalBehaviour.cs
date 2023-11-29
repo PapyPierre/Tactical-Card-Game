@@ -4,8 +4,6 @@
     {
         protected override void OnPose()
         {
-            base.OnPose();
-            
             if (data.category == CardManager.CardCategory.Herbivorous)
             {
                 foreach (var tile in myTile.AdjacentTile().WhichIs(CardManager.Cards.Wolf))
@@ -13,6 +11,8 @@
                     Negate(tile.cardOnThisTile);
                 }
             }
+            
+            base.OnPose();
         }
     }
 }

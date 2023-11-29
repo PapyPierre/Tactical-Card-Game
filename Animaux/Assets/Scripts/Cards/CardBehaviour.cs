@@ -11,6 +11,7 @@ namespace Cards
         private readonly List<CardBehaviour> isNegateBy = new ();
         [HideInInspector] public Tile myTile;
         internal Player owner;
+        protected uint currentPointsValue;
 
         public void Init(Tile posedOnTile, Player cardOwner)
         {
@@ -21,12 +22,15 @@ namespace Cards
 
         protected virtual void OnPose()
         {
-            
+            myTile.cardOnThisTile = this;
+            GameManager.instance.UpdateEachPlayerPoints();
         }
         
-        public virtual void OnScoreCompute()
+        public virtual uint CurrentPointsValue()
         {
-            if (isNegateBy.Count > 0) return;
+            if (isNegateBy.Count > 0) currentPointsValue = 0;
+            //Debug.Log($"{data.thisCard} at {transform.position} points value = {currentPointsValue}");
+            return currentPointsValue;
         }
         
         protected void NegateAdjacentCards()
@@ -52,12 +56,6 @@ namespace Cards
         {
             isNegateBy.Add(cardIsNegatesBy);
             myTile.overlapSR.enabled = true;
-        }
-
-        protected void AddScoreToPlayer(Player player, uint score)
-        {
-            player.numberOfPoints += score;
-            //TODO zoli vfx de tess
         }
     }
 }

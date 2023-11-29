@@ -2,20 +2,19 @@
 {
     public class OwlBehaviour : AnimalBehaviour
     {
-        public override void OnScoreCompute()
+        public override uint CurrentPointsValue()
         {
-            base.OnScoreCompute();
-
-            uint scoreToAdd = 0;
+            uint pointsValue = 0;
 
             int linkedForestsCount = myTile.GetAllLinkedGivenCard(CardManager.Cards.Forest).Count;
-            
             for (var index = 0; index < linkedForestsCount; index++)
             {
-                scoreToAdd += data.additionalScore;
+                pointsValue += data.pointsValue;
             }
 
-            AddScoreToPlayer(owner, scoreToAdd);
+            currentPointsValue = pointsValue;
+            
+            return base.CurrentPointsValue();
         }
     }
 }

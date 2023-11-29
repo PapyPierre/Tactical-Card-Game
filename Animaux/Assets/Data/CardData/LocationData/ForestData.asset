@@ -20,7 +20,7 @@ MonoBehaviour:
   category: 5
   effectType: 0
   cardFullName: Forest
-  cardEffect: Score 1 for each adjacent forest animal
+  cardEffect: Score 2 for each adjacent forest animal
   cardDescription: Temperate european forest
-  additionalScore: 1
+  pointsValue: 2
   negatedCategory: 0300000001000000

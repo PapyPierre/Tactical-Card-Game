@@ -22,5 +22,5 @@ MonoBehaviour:
   cardFullName: Red Squirrel
   cardEffect: Score 1, + 1 for each linked squirrel
   cardDescription: description...
-  additionalScore: 1
+  pointsValue: 1
   negatedCategory: 

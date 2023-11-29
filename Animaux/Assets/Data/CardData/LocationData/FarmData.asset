@@ -20,7 +20,7 @@ MonoBehaviour:
   category: 4
   effectType: 0
   cardFullName: Farm
-  cardEffect: Score 5
+  cardEffect: Score 6
   cardDescription: Classic european farm
-  additionalScore: 5
+  pointsValue: 6
   negatedCategory: 

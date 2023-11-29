@@ -1,7 +1,6 @@
 using Cards;
 using UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Board
 {

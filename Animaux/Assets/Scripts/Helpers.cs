@@ -32,9 +32,26 @@ public static class Helpers
 
         foreach (var tile in tiles)
         {
-            if (!tile.cardOnThisTile) continue;
+            if (tile.cardOnThisTile == null) continue;
             
             if (tile.cardOnThisTile.data.thisCard == card)
+            {
+                tileHavingTheCardOn.Add(tile);
+            }
+        }
+        
+        return tileHavingTheCardOn;
+    }
+    
+    public static List<Tile> WhichIs(this List<Tile> tiles, CardManager.CardType type)
+    {
+        List<Tile> tileHavingTheCardOn = new List<Tile>();
+
+        foreach (var tile in tiles)
+        {
+            if (tile.cardOnThisTile == null) continue;
+            
+            if (tile.cardOnThisTile.data.type == type)
             {
                 tileHavingTheCardOn.Add(tile);
             }
@@ -49,7 +66,7 @@ public static class Helpers
 
         foreach (var tile in tiles)
         {
-            if (!tile.cardOnThisTile) continue;
+            if (tile.cardOnThisTile == null) continue;
             
             if (tile.cardOnThisTile.data.biome == biome)
             {
@@ -64,31 +81,30 @@ public static class Helpers
     {
         List<Tile> linkedTiles = new List<Tile>();
 
-        int[,] binaryMatrix = new int[7, 7];
+        List<Tile> alreadyChekedTiles = new List<Tile>();
+        alreadyChekedTiles.Add(startTile);
 
-        linkedTiles.Add(CheckTile(startTile, givenCard, ref binaryMatrix, ref linkedTiles));
-
+        FindLinkedTiles(startTile, givenCard, ref alreadyChekedTiles, ref linkedTiles);
+        
         return linkedTiles;
     }
 
-    private static Tile CheckTile(Tile tile, CardManager.Cards givenCard, ref int[,] matrix, ref List<Tile> linkedTiles)
+    private static void FindLinkedTiles(Tile startTile, CardManager.Cards givenCard, ref List<Tile> alreadyChekedTiles, ref List<Tile> linkedTiles)
     {
-        foreach (var checkedTile in tile.AdjacentTile())
+        foreach (var tile in startTile.AdjacentTile())
         {
-            if (!checkedTile.cardOnThisTile) continue;
-            if (checkedTile.cardOnThisTile.data.thisCard != givenCard) continue;
-
-            var checkedTilePos = checkedTile.transform.position;
-
-            if (matrix[(int)checkedTilePos.x, (int)checkedTilePos.z] == 0)
-            {
-                linkedTiles.Add(CheckTile(tile, givenCard, ref matrix, ref linkedTiles));
-                matrix[(int)checkedTilePos.x, (int)checkedTilePos.z] = 1;
-                return checkedTile;
+            if (tile.cardOnThisTile == null) continue;
+            if (tile.cardOnThisTile.data.thisCard != givenCard) continue;
+            
+            if (!alreadyChekedTiles.Contains(tile))
+            {   
+                linkedTiles.Add(tile);
+                alreadyChekedTiles.Add(tile);
+                
+                // Continue Searching from new startTile
+                FindLinkedTiles(tile, givenCard, ref alreadyChekedTiles, ref linkedTiles);
             }
         }
-
-        return null;
     }
 
     public static void Shuffle<T>(this List<T> list)

@@ -18,9 +18,9 @@ MonoBehaviour:
   biome: 2
   type: 1
   category: 5
-  effectType: 2
+  effectType: 0
   cardFullName: Lake
-  cardEffect: Has no effect
+  cardEffect: Score 1 for each adjacent animal
   cardDescription: Basic lake
-  additionalScore: 0
+  pointsValue: 1
   negatedCategory: 

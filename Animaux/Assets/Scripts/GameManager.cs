@@ -26,9 +26,10 @@ public class GameManager : Singleton<GameManager>
     }
     
     [HideInInspector] public bool gameIsFinish;
-
+    
     public Player[] players;
-    [FormerlySerializedAs("currentPlayingPlayer")] [HideInInspector] public Player currentPlayer;
+   // [HideInInspector] 
+    public Player currentPlayer;
     
     private void Start()
     {
@@ -74,7 +75,7 @@ public class GameManager : Singleton<GameManager>
     }
     
     // Called from UI
-    public void PlayCardInHand(int i)
+    public void SelectCardInHand(int i)
     {
         if (currentPlayer.hasPlayedACardThisTurn) return;
             
@@ -89,6 +90,8 @@ public class GameManager : Singleton<GameManager>
         currentPlayer = NextPlayerToPlay();
 
         currentPlayer.StartTurn(TurnNumber < 2);
+        
+        _uiManager.SetActiveEndTurnBtn(false);
     }
 
     private Player NextPlayerToPlay()
@@ -103,7 +106,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (gameIsFinish)
         {
-            ComputePoints();
+            FindWinner();
         }
         else
         {
@@ -111,29 +114,46 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
-    private void ComputePoints()
+    public void UpdateEachPlayerPoints()
     {
-        Debug.Log(0);
+        foreach (var player in players)
+        {
+            player.currentPoints = 0;
+        }
         
         foreach (var tile in _boardManager.tileMatrix)
         {
-            if (tile.cardOnThisTile)
+            if (tile.cardOnThisTile == null) continue;
+            tile.cardOnThisTile.owner.currentPoints += tile.cardOnThisTile.CurrentPointsValue();
+        }
+        
+        for (var i = 0; i < players.Length; i++)
+        {
+            var player = players[i];
+            
+            if (player.currentPoints > 100)
             {
-                tile.cardOnThisTile.OnScoreCompute();
+                player.currentPoints = 100;
+                gameIsFinish = true;
             }
+            
+            _uiManager.UpdateSliderPoints(i + 1, player.currentPoints);
         }
+    }
 
-        if (players[0].numberOfPoints > players[1].numberOfPoints)
+    private void FindWinner()
+    {
+        if (players[0].currentPoints > players[1].currentPoints)
         {
-            Debug.Log(players[0] + " win!");
+            _uiManager.ShowWinText("Player 1 won!");
         }
-        else if (players[0].numberOfPoints < players[1].numberOfPoints)
+        else if (players[0].currentPoints < players[1].currentPoints)
         {
-            Debug.Log(players[1] + " win!");
+            _uiManager.ShowWinText("Player 2 won!");
         }
         else
         {
-            Debug.Log("Draw");
+            _uiManager.ShowWinText("Draw!");
         }
     }
 }

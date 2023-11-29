@@ -2,11 +2,10 @@
 {
     public class DeerBehaviour : AnimalBehaviour
     {
-        protected override void OnPose()
+        public override uint CurrentPointsValue()
         {
-            base.OnPose();
-
             CheckForWin();
+            return base.CurrentPointsValue();
         }
 
         public void CheckForWin()
@@ -33,7 +32,7 @@
 
         private void InstantWin()
         {
-            AddScoreToPlayer(owner, 9999);
+            currentPointsValue = 100;
             GameManager.instance.gameIsFinish = true;
         }
     }

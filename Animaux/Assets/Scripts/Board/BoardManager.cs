@@ -8,6 +8,7 @@ namespace Board
     public class BoardManager : Singleton<BoardManager>
     {
         private GameManager _gameManager;
+        private UIManager _uiManager;
         
         [HideInInspector] public Tile mouseOverThisTile;
 
@@ -22,6 +23,7 @@ namespace Board
         private void Start()
         {
             _gameManager = GameManager.instance;
+            _uiManager = UIManager.instance;
         }
 
         public void Init()
@@ -48,21 +50,21 @@ namespace Board
 
         public void PlaceCard(Tile tile, CardManager.Cards card)
         {
-            UIManager.instance.cardInfoDisplayer.HideCardInfoDisplay();
+            _uiManager.cardInfoDisplayer.HideCardInfoDisplay();
             
             Player currentPlayer =  _gameManager.currentPlayer;
 
             currentPlayer.hasPlayedACardThisTurn = true;
             
             currentPlayer.cardsInHand.Remove(currentPlayer.selectedCardInHand);
-            UIManager.instance.UpdateCardInHandSprites();
-            UIManager.instance.ResetCardInHandColor();
+            _uiManager.UpdateCardInHandSprites();
+            _uiManager.ResetCardInHandColor();
             currentPlayer.selectedCardInHand = CardManager.Cards.Uninitialised;
             
             Vector3 tilePos = tile.transform.position;
             CardData cardData = CardManager.instance.allCardsData[(int) card];
             
-            Vector3 pos = new Vector3(tilePos.x, 0.1f, tilePos.y);
+            Vector3 pos = new Vector3(tilePos.x, 0.1f, tilePos.z);
             
             var posedCard = Instantiate(cardData.prefab, pos, Quaternion.identity).GetComponent<CardBehaviour>(); 
             posedCard.Init(tile, currentPlayer);
@@ -76,6 +78,7 @@ namespace Board
             
             Vector2Int tileCoord = new Vector2Int((int) tilePos.x, (int) tilePos.z);
             tileMatrix[tileCoord.x, tileCoord.y].cardOnThisTile = posedCard;
+            _uiManager.SetActiveEndTurnBtn(true);
             CheckIfBoardIsFull();
         }
 

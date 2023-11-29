@@ -2,10 +2,10 @@
 {
     public class FarmBehaviour : LocationBehaviour
     {
-        public override void OnScoreCompute()
+        public override uint CurrentPointsValue()
         {
-            base.OnScoreCompute();
-            AddScoreToPlayer(owner, data.additionalScore);
+            currentPointsValue = data.pointsValue;
+            return base.CurrentPointsValue();
         }
     }
 }

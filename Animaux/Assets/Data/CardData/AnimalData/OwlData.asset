@@ -20,7 +20,7 @@ MonoBehaviour:
   category: 2
   effectType: 0
   cardFullName: Tawny Owl
-  cardEffect: Score 1 for each linked forest
+  cardEffect: Score 2 for each linked forest
   cardDescription: description...
-  additionalScore: 1
+  pointsValue: 2
   negatedCategory: 
