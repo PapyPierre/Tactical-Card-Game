@@ -20,30 +20,6 @@ namespace Board
          _meshRenderer = GetComponent<MeshRenderer>();
       }
 
-      private void OnMouseEnter()
-      {
-         BoardManager.instance.mouseOverThisTile = this;
-         _meshRenderer.material = overMat;
-
-         if (GameManager.instance.currentPlayer.selectedCardInHand == CardManager.Cards.Uninitialised && cardOnThisTile)
-         {
-            UIManager.instance.cardInfoDisplayer.ShowCardInfoDisplay(cardOnThisTile.data.thisCard);
-         }
-      }
-
-      private void OnMouseExit()
-      {
-         if (BoardManager.instance.mouseOverThisTile == this)
-         {
-            BoardManager.instance.mouseOverThisTile = null;
-            _meshRenderer.material = baseMat;
-            if (GameManager.instance.currentPlayer.selectedCardInHand == CardManager.Cards.Uninitialised)
-            {
-               UIManager.instance.cardInfoDisplayer.HideCardInfoDisplay();
-            }
-         }
-      }
-
       public bool IsLegalMove()
       {
          return cardOnThisTile == null;

@@ -1,21 +1,16 @@
-using System;
 using Cards;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 namespace UI
 {
-    public class CardInHandDisplay : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class CardInHandDisplay : MonoBehaviour
     {
-        private bool isMouseOver;
+        private bool isSelected;
         private Vector3 initScale;
-        [HideInInspector] public bool isLocked;
-        
-        private const float animDuration = 1.0f;
+
+        private const float animDuration = 0.5f;
         private float startTime;
-
-        [SerializeField] private int index;
-
+        
         private void Start()
         {
             initScale = transform.localScale;
@@ -23,46 +18,28 @@ namespace UI
 
         private void Update()
         {
-            if (isMouseOver)
+            if (isSelected)
             {
-                transform.localScale = Vector3.Slerp(transform.localScale, initScale * 1.4f, 
+                transform.localScale = Vector3.Slerp(transform.localScale, initScale * 1.4f,
                     (Time.time - startTime) / animDuration);
             }
             else
             {
-                if (!isLocked)
-                {
-                    transform.localScale = Vector3.Slerp(transform.localScale, initScale, 
-                        (Time.time - startTime) / animDuration);
-                }
+                transform.localScale = Vector3.Slerp(transform.localScale, initScale,
+                    (Time.time - startTime) / animDuration);
             }
         }
 
-        public void OnPointerEnter(PointerEventData eventData)
+        public void Select()
         {
-            isMouseOver = true;
+            isSelected = true;
             startTime = Time.time;
-            
-            if (GameManager.instance.currentPlayer.selectedCardInHand == CardManager.Cards.Uninitialised)
-            {
-                UIManager.instance.cardInfoDisplayer.ShowCardInfoDisplay(GameManager.instance.currentPlayer.cardsInHand[index]);
-            }
         }
 
-        public void OnPointerExit(PointerEventData eventData)
+        public void UnSelect()
         {
             startTime = Time.time;
-            isMouseOver = false;
-            
-            if (GameManager.instance.currentPlayer.selectedCardInHand == CardManager.Cards.Uninitialised)
-            {
-                UIManager.instance.cardInfoDisplayer.HideCardInfoDisplay();
-            }
-        }
-        
-        private void OnDisable()
-        {
-            isLocked = false;
+            isSelected = false;
         }
     }
 }

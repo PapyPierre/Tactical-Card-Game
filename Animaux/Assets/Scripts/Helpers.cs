@@ -12,13 +12,13 @@ public static class Helpers
         List<Tile> adjacentTile = new List<Tile>();
 
         // Above
-        if (tilePos.z < 6) adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x, (int)tilePos.z + 1]);
+        if (tilePos.z < 5) adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x, (int)tilePos.z + 1]);
 
         // Left
         if (tilePos.x > 0) adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x - 1, (int)tilePos.z]);
 
         // Right
-        if (tilePos.x < 6) adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x + 1, (int)tilePos.z]);
+        if (tilePos.x < 5) adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x + 1, (int)tilePos.z]);
 
         // Below
         if (tilePos.z > 0) adjacentTile.Add(BoardManager.instance.tileMatrix[(int)tilePos.x, (int)tilePos.z - 1]);

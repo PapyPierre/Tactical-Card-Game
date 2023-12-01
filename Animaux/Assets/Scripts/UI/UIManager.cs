@@ -15,11 +15,18 @@ namespace UI
         [SerializeField] private GameObject endTurnBtn; 
 
         [Space] public CardInfoDisplayer cardInfoDisplayer;
+        [SerializeField] private GameObject cardPreview;
 
         [Space] public List<Image> cardInHandSprite;
         public List<CardInHandDisplay> cardInHandDisplays = new();
 
         [Space] public TextMeshProUGUI turnNumberTMP;
+        
+        [Space, SerializeField] private RectTransform player1PointsDisplay;
+        [SerializeField] private RectTransform player2PointsDisplay;
+        
+        [SerializeField] private Vector3 leaderPointsDisplayPos = new Vector3(40, -50, 0);
+        [SerializeField] private Vector3 otherPointsDisplayPos = new Vector3(-50, -210, 0);
 
         [Space, SerializeField] private Slider pointsSliderPlayer1;
         [SerializeField] private Slider pointsSliderPlayer2;
@@ -57,6 +64,26 @@ namespace UI
                     Debug.LogError($"{playerIndex} is not correct");
                     break;
             }
+
+           var player1Score = _gameManager.players[0].currentPoints;
+           var player2Score = _gameManager.players[1].currentPoints;
+  
+            if (player1Score > player2Score)
+            {
+                player1PointsDisplay.localPosition = leaderPointsDisplayPos;
+                player2PointsDisplay.localPosition = otherPointsDisplayPos;
+                
+                player1PointsDisplay.localScale = Vector3.one * 1.5f;
+                player2PointsDisplay.localScale = Vector3.one;
+            }
+            else if (player1Score < player2Score)
+            {
+                player2PointsDisplay.localPosition = leaderPointsDisplayPos;
+                player1PointsDisplay.localPosition = otherPointsDisplayPos;
+                
+                player2PointsDisplay.localScale = Vector3.one * 1.5f;
+                player1PointsDisplay.localScale = Vector3.one;
+            }
         }
 
         public void UpdateCardInHandSprites()
@@ -73,6 +100,11 @@ namespace UI
                 var cardIndex = (int)_gameManager.currentPlayer.cardsInHand[i];
                 Sprite newSprite = _cardManager.allCardsData[cardIndex].sprite;
                 image.sprite = newSprite;
+            }
+            
+            foreach (var cardInHand in cardInHandDisplays)
+            {
+                cardInHand.UnSelect();
             }
         }
 

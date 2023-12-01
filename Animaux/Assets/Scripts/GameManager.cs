@@ -3,7 +3,6 @@ using Board;
 using Cards;
 using UI;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -11,7 +10,8 @@ public class GameManager : Singleton<GameManager>
     private UIManager _uiManager;
 
     private bool gameHasStarted;
-    
+    [HideInInspector] public bool gameIsFinish;
+
     private int turnNumber;
 
     public int TurnNumber
@@ -21,22 +21,26 @@ public class GameManager : Singleton<GameManager>
         set
         {
             turnNumber = value;
-            _uiManager.turnNumberTMP.text = "Turn " + value;
+            _uiManager.turnNumberTMP.text = value.ToString();
         }
     }
     
-    [HideInInspector] public bool gameIsFinish;
-    
     public Player[] players;
-   // [HideInInspector] 
-    public Player currentPlayer;
-    
+    [HideInInspector] public Player currentPlayer;
+
+    private Camera _camera;
+    [SerializeField] private LayerMask _layerMask;
+
     private void Start()
     {
+        Application.targetFrameRate = 60;
+
         _boardManager = BoardManager.instance;
         _uiManager = UIManager.instance;
+
+        _camera = Camera.main;
     }
-    
+
     public void StartGame()
     {
         _boardManager.Init();
@@ -45,40 +49,33 @@ public class GameManager : Singleton<GameManager>
         gameHasStarted = true;
         gameIsFinish = false;
     }
-    
-    private void Update()
+
+    public void CheckToPlayCard(Vector2 touchPosOnScreen)
     {
         if (!gameHasStarted) return;
-       
-        if (Input.GetMouseButtonDown(0) && currentPlayer.isReadyToPlay)
-        {
-            OnPlayerClick();
-        }
-
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            gameIsFinish = true;
-        }
-    }
-
-    private void OnPlayerClick()
-    {
-        if (_boardManager.mouseOverThisTile == null) return;
-        
+        if (!currentPlayer.isReadyToPlay) return;
         if (currentPlayer.selectedCardInHand == CardManager.Cards.Uninitialised) return;
 
-        Tile selectedTile = _boardManager.mouseOverThisTile;
-
-        if (!selectedTile.IsLegalMove()) return;
+        Ray ray = _camera.ScreenPointToRay(touchPosOnScreen);
         
-        _boardManager.PlaceCard(selectedTile, currentPlayer.selectedCardInHand);
+        Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 2);
+
+        if (Physics.Raycast(ray, out var hit, 100, _layerMask))
+        {
+            if (hit.collider.CompareTag("Tile"))
+            {
+                Tile selectedTile = hit.collider.GetComponent<Tile>();
+                if (!selectedTile.IsLegalMove()) return;
+                _boardManager.PlaceCard(selectedTile, currentPlayer.selectedCardInHand);
+            }
+        }
     }
-    
+
     // Called from UI
     public void SelectCardInHand(int i)
     {
         if (currentPlayer.hasPlayedACardThisTurn) return;
-            
+
         currentPlayer.SelectCardInHand(i);
 
         _uiManager.ResetCardInHandColor();
@@ -90,7 +87,7 @@ public class GameManager : Singleton<GameManager>
         currentPlayer = NextPlayerToPlay();
 
         currentPlayer.StartTurn(TurnNumber < 2);
-        
+
         _uiManager.SetActiveEndTurnBtn(false);
     }
 
@@ -100,7 +97,7 @@ public class GameManager : Singleton<GameManager>
         int nextIndex = (currentIndex + 1) % players.Length;
         return players[nextIndex];
     }
-    
+
     // Called from UI
     public void EndOfTurn()
     {
@@ -110,6 +107,10 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
+            foreach (var cardInHand in _uiManager.cardInHandDisplays)
+            {
+                cardInHand.UnSelect();
+            }
             _uiManager.switchTurnMenu.Show(NextPlayerToPlay());
         }
     }
@@ -120,23 +121,23 @@ public class GameManager : Singleton<GameManager>
         {
             player.currentPoints = 0;
         }
-        
+
         foreach (var tile in _boardManager.tileMatrix)
         {
             if (tile.cardOnThisTile == null) continue;
             tile.cardOnThisTile.owner.currentPoints += tile.cardOnThisTile.CurrentPointsValue();
         }
-        
+
         for (var i = 0; i < players.Length; i++)
         {
             var player = players[i];
-            
+
             if (player.currentPoints > 100)
             {
                 player.currentPoints = 100;
                 gameIsFinish = true;
             }
-            
+
             _uiManager.UpdateSliderPoints(i + 1, player.currentPoints);
         }
     }

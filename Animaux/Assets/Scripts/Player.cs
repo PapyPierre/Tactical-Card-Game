@@ -21,8 +21,7 @@ public class Player : MonoBehaviour
     
     [HideInInspector] public CardManager.Cards selectedCardInHand;
     [HideInInspector] public bool hasPlayedACardThisTurn;
-
-    public int playerIndex;
+    
     public Color playerColor;
 
     [HideInInspector] public uint currentPoints;
@@ -64,15 +63,13 @@ public class Player : MonoBehaviour
     public void SelectCardInHand(int i)
     {
         selectedCardInHand = cardsInHand[i];
-        
-        _uiManager.cardInfoDisplayer.ShowCardInfoDisplay(cardsInHand[i]);
 
         foreach (var cardInHand in _uiManager.cardInHandDisplays)
         {
-            cardInHand.isLocked = false;
+            cardInHand.UnSelect();
         }
         
-        _uiManager.cardInHandDisplays[i].isLocked = true;
+        _uiManager.cardInHandDisplays[i].Select();
     }
     
     public void StartTurn(bool isFirstPlayerTurn)

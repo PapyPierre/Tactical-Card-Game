@@ -9,15 +9,12 @@ namespace Board
     {
         private GameManager _gameManager;
         private UIManager _uiManager;
-        
-        [HideInInspector] public Tile mouseOverThisTile;
 
         [SerializeField] private GameObject tilePrefab;
-        
-        public const int boardSize = 7;
+
+        private const int boardSize = 6;
         public readonly Tile[,] tileMatrix = new Tile[boardSize, boardSize];
-    
-        private readonly List<Tile> legalMoves = new ();
+        
         private bool lastTurnWasSkipped;
 
         private void Start()
@@ -50,9 +47,7 @@ namespace Board
 
         public void PlaceCard(Tile tile, CardManager.Cards card)
         {
-            _uiManager.cardInfoDisplayer.HideCardInfoDisplay();
-            
-            Player currentPlayer =  _gameManager.currentPlayer;
+            Player currentPlayer = _gameManager.currentPlayer;
 
             currentPlayer.hasPlayedACardThisTurn = true;
             
