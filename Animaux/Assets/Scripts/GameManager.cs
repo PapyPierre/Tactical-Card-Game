@@ -24,6 +24,8 @@ public class GameManager : Singleton<GameManager>
             _uiManager.turnNumberTMP.text = value.ToString();
         }
     }
+
+    [SerializeField] private uint pointRequiredToWin;
     
     public Player[] players;
     [HideInInspector] public Player currentPlayer;
@@ -54,7 +56,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (!gameHasStarted) return;
         if (!currentPlayer.isReadyToPlay) return;
-        if (currentPlayer.selectedCardInHand == CardManager.Cards.Uninitialised) return;
+        if (currentPlayer.selectedCardInHand == CardManager.Cards.None) return;
 
         Ray ray = _camera.ScreenPointToRay(touchPosOnScreen);
         
@@ -132,9 +134,9 @@ public class GameManager : Singleton<GameManager>
         {
             var player = players[i];
 
-            if (player.currentPoints > 100)
+            if (player.currentPoints > pointRequiredToWin)
             {
-                player.currentPoints = 100;
+                player.currentPoints = pointRequiredToWin;
                 gameIsFinish = true;
             }
 

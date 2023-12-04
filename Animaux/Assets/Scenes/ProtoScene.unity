@@ -4988,6 +4988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameIsFinish: 0
+  pointRequiredToWin: 60
   players:
   - {fileID: 1839890556}
   - {fileID: 1083808658}

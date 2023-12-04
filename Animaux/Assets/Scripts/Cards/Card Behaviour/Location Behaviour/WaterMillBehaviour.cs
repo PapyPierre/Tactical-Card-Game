@@ -6,7 +6,7 @@
         {
             uint pointsValue = 0;
 
-            int aquaticAdjacentTilesCount = myTile.AdjacentTile().WhichIs(CardManager.CardBiomes.Aquatic).Count;
+            int aquaticAdjacentTilesCount = myTile.AdjacentTile().WhichIs(CardManager.CardBiome.Aquatic).Count;
 
             for (var index = 0; index < aquaticAdjacentTilesCount; index++)
             {

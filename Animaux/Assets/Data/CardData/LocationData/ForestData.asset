@@ -16,11 +16,13 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 469fec82c98e40041882c484e5cbbc53, type: 3}
   thisCard: 6
   biome: 1
-  type: 1
-  category: 5
+  type: 2
+  category: 0
   effectType: 0
   cardFullName: Forest
   cardEffect: Score 2 for each adjacent forest animal
   cardDescription: Temperate european forest
   pointsValue: 2
+  negatedBiomes: 
+  negatedTypes: 
   negatedCategory: 0300000001000000

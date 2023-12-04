@@ -18,7 +18,7 @@ namespace Cards.Card_Behaviour.Location_Behaviour
         {
             uint pointsValue = 0;
 
-            foreach (var tile in myTile.AdjacentTile().WhichIs(CardManager.CardBiomes.Forest))
+            foreach (var tile in myTile.AdjacentTile().WhichIs(CardManager.CardBiome.Forest))
             {
                 // Si c'est aussi un animal
                 if (tile.cardOnThisTile.data.type == CardManager.CardType.Animal)

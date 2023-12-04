@@ -16,11 +16,13 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: d77752f822a47e545999a523ea1ba465, type: 3}
   thisCard: 4
   biome: 1
-  type: 0
-  category: 6
+  type: 1
+  category: 4
   effectType: 1
   cardFullName: Wild Boar
-  cardEffect: Negates effects of all adjacent locations
+  cardEffect: Negates effects of all adjacent artificial or forest locations
   cardDescription: description...
-  additionalScore: 0
-  negatedCategory: 0400000005000000
+  pointsValue: 0
+  negatedBiomes: 
+  negatedTypes: 
+  negatedCategory: 

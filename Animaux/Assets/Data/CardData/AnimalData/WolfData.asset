@@ -16,11 +16,13 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 896505c5601c6f5459478ae7b7fcb8cc, type: 3}
   thisCard: 0
   biome: 1
-  type: 0
+  type: 1
   category: 1
   effectType: 1
   cardFullName: Grey Wolf
   cardEffect: Negates effects of all adjacent herbivorous animals
   cardDescription: description...
-  additionalScore: 0
+  pointsValue: 0
+  negatedBiomes: 
+  negatedTypes: 
   negatedCategory: 03000000

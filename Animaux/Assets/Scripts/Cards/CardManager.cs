@@ -1,9 +1,18 @@
+using System;
 using System.Collections.Generic;
 
 namespace Cards
 {
     public class CardManager : Singleton<CardManager>
     {
+        [Serializable]
+        public class CardParam
+        {
+            public CardBiome biome;
+            public CardType type;
+            public CardCategory category;
+        }
+        
         public enum Cards
         {
             Wolf = 0,
@@ -15,19 +24,20 @@ namespace Cards
             Forest = 6,
             Lake = 7,
             WaterMill = 8,
-            Uninitialised = 9,
+            None = 9,
         }
 
-        public enum CardBiomes
+        public enum CardBiome
         {
-            None,
-            Forest,
-            Aquatic,
-            Artificial,
+            None = 0,
+            Forest = 1,
+            Aquatic = 2,
+            Artificial = 3,
         }
         
         public enum CardType
         {
+            None,
             Animal, 
             Location,
         }
@@ -38,8 +48,6 @@ namespace Cards
             Carnivorous,
             Flying, 
             Herbivorous,
-            Building,
-            Scenery,
             Omnivorous,
         }
 

@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     {
         _uiManager = UIManager.instance;
         _gameManager = GameManager.instance;
-        selectedCardInHand = CardManager.Cards.Uninitialised;
+        selectedCardInHand = CardManager.Cards.None;
         Init();
     }
     

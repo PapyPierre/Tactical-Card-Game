@@ -16,11 +16,13 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: 407b171c793bf1c4c8e42a164d93365d, type: 3}
   thisCard: 1
   biome: 1
-  type: 0
+  type: 1
   category: 2
   effectType: 0
   cardFullName: Tawny Owl
   cardEffect: Score 2 for each linked forest
   cardDescription: description...
   pointsValue: 2
+  negatedBiomes: 
+  negatedTypes: 
   negatedCategory: 

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Cards
 {
@@ -13,9 +14,9 @@ namespace Cards
         
         [Header("Card Data")]
         public CardManager.Cards thisCard;
-        public CardManager.CardBiomes biome;
+        public CardManager.CardBiome biome;
         public CardManager.CardType type;
-        public CardManager.CardCategory category;
+        [ShowIf("CheckIfAnimal")] public CardManager.CardCategory category;
         public CardManager.EffectType effectType;
 
         [Header("UI Info Data")] 
@@ -24,18 +25,13 @@ namespace Cards
         [TextArea] public string cardDescription;
 
         [ShowIf("CheckIfScore"), Space] public uint pointsValue;
-        
-        [ShowIf("CheckIfNegate"), Space]
-        public List<CardManager.CardCategory>  negatedCategory;
 
-        private bool CheckIfScore()
-        {
-            return effectType == CardManager.EffectType.score;
-        }
+        [ShowIf("CheckIfNegate"), Space] public List<CardManager.CardBiome>  negatedBiomes;
+        [ShowIf("CheckIfNegate")] public List<CardManager.CardType>  negatedTypes;
+        [ShowIf("CheckIfNegate")] public List<CardManager.CardCategory>  negatedCategory;
         
-        private bool CheckIfNegate()
-        {
-            return effectType == CardManager.EffectType.negate;
-        }
+        private bool CheckIfScore() => effectType == CardManager.EffectType.score;
+        private bool CheckIfNegate() => effectType == CardManager.EffectType.negate;
+        private bool CheckIfAnimal() => type == CardManager.CardType.Animal;
     }
 }

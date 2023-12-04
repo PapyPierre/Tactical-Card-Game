@@ -16,11 +16,13 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: c85b822f1c9d04d4194bb14b8092db97, type: 3}
   thisCard: 7
   biome: 2
-  type: 1
+  type: 2
   category: 5
   effectType: 0
   cardFullName: Lake
   cardEffect: Score 1 for each adjacent animal
   cardDescription: Basic lake
   pointsValue: 1
+  negatedBiomes: 
+  negatedTypes: 
   negatedCategory: 

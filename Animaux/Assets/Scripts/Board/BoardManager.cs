@@ -54,7 +54,7 @@ namespace Board
             currentPlayer.cardsInHand.Remove(currentPlayer.selectedCardInHand);
             _uiManager.UpdateCardInHandSprites();
             _uiManager.ResetCardInHandColor();
-            currentPlayer.selectedCardInHand = CardManager.Cards.Uninitialised;
+            currentPlayer.selectedCardInHand = CardManager.Cards.None;
             
             Vector3 tilePos = tile.transform.position;
             CardData cardData = CardManager.instance.allCardsData[(int) card];

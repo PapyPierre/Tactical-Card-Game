@@ -60,7 +60,7 @@ public static class Helpers
         return tileHavingTheCardOn;
     }
     
-    public static List<Tile> WhichIs(this List<Tile> tiles, CardManager.CardBiomes biome)
+    public static List<Tile> WhichIs(this List<Tile> tiles, CardManager.CardBiome biome)
     {
         List<Tile> tileBeingThisBiome = new List<Tile>();
 
@@ -69,6 +69,23 @@ public static class Helpers
             if (tile.cardOnThisTile == null) continue;
             
             if (tile.cardOnThisTile.data.biome == biome)
+            {
+                tileBeingThisBiome.Add(tile);
+            }
+        }
+        
+        return tileBeingThisBiome;
+    }
+    
+    public static List<Tile> WhichIs(this List<Tile> tiles, CardManager.CardCategory category)
+    {
+        List<Tile> tileBeingThisBiome = new List<Tile>();
+
+        foreach (var tile in tiles)
+        {
+            if (tile.cardOnThisTile == null) continue;
+            
+            if (tile.cardOnThisTile.data.category == category)
             {
                 tileBeingThisBiome.Add(tile);
             }

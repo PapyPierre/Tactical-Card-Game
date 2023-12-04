@@ -16,11 +16,13 @@ MonoBehaviour:
   sprite: {fileID: 21300000, guid: b5ba05e7a69bb114aa89fec194c8e7c1, type: 3}
   thisCard: 3
   biome: 1
-  type: 0
+  type: 1
   category: 3
   effectType: 0
   cardFullName: Red Squirrel
   cardEffect: Score 1, + 1 for each linked squirrel
   cardDescription: description...
   pointsValue: 1
+  negatedBiomes: 
+  negatedTypes: 
   negatedCategory: 
