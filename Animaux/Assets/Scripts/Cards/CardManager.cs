@@ -27,28 +27,28 @@ namespace Cards
             None = 9,
         }
 
+        [Flags]
         public enum CardBiome
         {
-            None = 0,
-            Forest = 1,
-            Aquatic = 2,
-            Artificial = 3,
+            Forest = 1 << 0,
+            Aquatic = 1 << 1,
+            Artificial = 1 << 2,
         }
         
+        [Flags]
         public enum CardType
         {
-            None,
-            Animal, 
-            Location,
+            Animal = 1 << 0, 
+            Location = 1 << 1,
         }
 
+        [Flags]
         public enum CardCategory
         {
-            None,
-            Carnivorous,
-            Flying, 
-            Herbivorous,
-            Omnivorous,
+            Carnivorous = 1 << 0,
+            Flying = 1 << 1, 
+            Herbivorous = 1 << 2,
+            Omnivorous  = 1 << 3,
         }
 
         public enum EffectType

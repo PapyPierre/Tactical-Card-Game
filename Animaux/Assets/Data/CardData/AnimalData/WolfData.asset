@@ -23,6 +23,7 @@ MonoBehaviour:
   cardEffect: Negates effects of all adjacent herbivorous animals
   cardDescription: description...
   pointsValue: 0
-  negatedBiomes: 
-  negatedTypes: 
-  negatedCategory: 03000000
+  negatedCardParam:
+  - biome: 0
+    type: 1
+    category: 4

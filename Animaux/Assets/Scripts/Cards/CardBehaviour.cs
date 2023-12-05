@@ -42,28 +42,12 @@ namespace Cards
             }
 
             List<Tile> adjacentTiles = myTile.AdjacentTile();
-            
-            foreach (var biome in data.negatedBiomes)
-            {
-                foreach (var tile in adjacentTiles.WhichIs(biome))
-                {
-                    tile.cardOnThisTile.Negate(this);
-                }
-            }
 
-            foreach (var type in data.negatedTypes)
+            foreach (var cardParam in data.negatedCardParam)
             {
-                foreach (var tile in adjacentTiles.WhichIs(type))
+                foreach (var tile in adjacentTiles.WhichIs(cardParam.biome, cardParam.type, cardParam.category)) 
                 {
-                    tile.cardOnThisTile.Negate(this);
-                }
-            }
-
-            foreach (var category in data.negatedCategory)
-            {
-                foreach (var tile in adjacentTiles.WhichIs(category))
-                {
-                    tile.cardOnThisTile.Negate(this);
+                  tile.cardOnThisTile.Negate(this);
                 }
             }
         }

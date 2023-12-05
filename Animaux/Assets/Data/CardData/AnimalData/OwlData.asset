@@ -23,6 +23,4 @@ MonoBehaviour:
   cardEffect: Score 2 for each linked forest
   cardDescription: description...
   pointsValue: 2
-  negatedBiomes: 
-  negatedTypes: 
-  negatedCategory: 
+  negatedCardParam: []

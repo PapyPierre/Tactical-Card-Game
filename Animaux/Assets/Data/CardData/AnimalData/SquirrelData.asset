@@ -17,12 +17,10 @@ MonoBehaviour:
   thisCard: 3
   biome: 1
   type: 1
-  category: 3
+  category: 4
   effectType: 0
   cardFullName: Red Squirrel
   cardEffect: Score 1, + 1 for each linked squirrel
   cardDescription: description...
   pointsValue: 1
-  negatedBiomes: 
-  negatedTypes: 
-  negatedCategory: 
+  negatedCardParam: []

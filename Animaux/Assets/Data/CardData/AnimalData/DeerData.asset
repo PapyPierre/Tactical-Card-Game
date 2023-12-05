@@ -17,12 +17,10 @@ MonoBehaviour:
   thisCard: 2
   biome: 1
   type: 1
-  category: 3
+  category: 4
   effectType: 2
   cardFullName: Red Deer
   cardEffect: Instantly win the game if the deer is surrounded by forests
   cardDescription: description...
   pointsValue: 0
-  negatedBiomes: 
-  negatedTypes: 
-  negatedCategory: 
+  negatedCardParam: []
