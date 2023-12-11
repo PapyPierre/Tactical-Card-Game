@@ -108,6 +108,14 @@ namespace UI
             }
         }
 
+        public void ResetCardInHandScale()
+        {
+            foreach (var card in cardInHandDisplays)
+            {
+                card.ResetScale();
+            }
+        }
+
         public void ResetCardInHandColor()
         {
             foreach (var image in cardInHandSprite)

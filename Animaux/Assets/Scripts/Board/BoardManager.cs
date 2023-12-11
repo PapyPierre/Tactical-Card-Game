@@ -11,11 +11,15 @@ namespace Board
         private UIManager _uiManager;
 
         [SerializeField] private GameObject tilePrefab;
+        [SerializeField] private Transform tilesParent;
+        [SerializeField] private Transform playedCardsParent;
 
         private const int boardSize = 6;
         public readonly Tile[,] tileMatrix = new Tile[boardSize, boardSize];
-        
-        private bool lastTurnWasSkipped;
+
+        private Tile lastPlayedOnTile;
+        [SerializeField] private Material baseMat;
+        [SerializeField] private Material playedOnMat;
 
         private void Start()
         {
@@ -39,7 +43,7 @@ namespace Board
                 for (int z = 0; z < boardSize; z++)
                 {
                     tilePos = new Vector3(tilePos.x, tilePos.y, z);
-                    Tile newTile = Instantiate(tilePrefab, tilePos, Quaternion.identity).GetComponent<Tile>();
+                    Tile newTile = Instantiate(tilePrefab, tilePos, Quaternion.identity, tilesParent).GetComponent<Tile>();
                     tileMatrix[(int)tilePos.x, z] = newTile;
                 }
             }
@@ -55,13 +59,14 @@ namespace Board
             _uiManager.UpdateCardInHandSprites();
             _uiManager.ResetCardInHandColor();
             currentPlayer.selectedCardInHand = CardManager.Cards.None;
-            
+            _uiManager.ResetCardInHandScale();
+
             Vector3 tilePos = tile.transform.position;
             CardData cardData = CardManager.instance.allCardsData[(int) card];
             
             Vector3 pos = new Vector3(tilePos.x, 0.1f, tilePos.z);
             
-            var posedCard = Instantiate(cardData.prefab, pos, Quaternion.identity).GetComponent<CardBehaviour>(); 
+            var posedCard = Instantiate(cardData.prefab, pos, Quaternion.identity, playedCardsParent).GetComponent<CardBehaviour>(); 
             posedCard.Init(tile, currentPlayer);
             
             // For Debug, waiting for 3D models
@@ -71,28 +76,52 @@ namespace Board
                 tile.baseSR.color = currentPlayer.playerColor;
             }
             
-            Vector2Int tileCoord = new Vector2Int((int) tilePos.x, (int) tilePos.z);
-            tileMatrix[tileCoord.x, tileCoord.y].cardOnThisTile = posedCard;
+            tile.cardOnThisTile = posedCard;
+
+            if (lastPlayedOnTile != null) lastPlayedOnTile.SetMat(baseMat);
+            lastPlayedOnTile = tile;
+            lastPlayedOnTile.SetMat(playedOnMat);
+            
             _uiManager.SetActiveEndTurnBtn(true);
             CheckIfBoardIsFull();
         }
 
         private void CheckIfBoardIsFull()
         {
-            uint occupiedTile = 0; 
+            if (GetOccuppiedTile().Count >= boardSize * boardSize)
+            {
+                _gameManager.gameIsFinish = true;
+            }
+        }
+
+        private List<Tile> GetOccuppiedTile()
+        {
+            List<Tile> occupiedTiles = new List<Tile>();
             
             foreach (var tile in tileMatrix)
             {
                 if (tile.cardOnThisTile)
                 {
-                    occupiedTile++;
+                    occupiedTiles.Add(tile);
                 }
             }
 
-            if (occupiedTile >= boardSize * boardSize)
+            return occupiedTiles;
+        }
+
+        public List<Tile> GetLegalMoves()
+        {
+            List<Tile> moves = new List<Tile>();
+
+            foreach (var tile in tileMatrix)
             {
-                _gameManager.gameIsFinish = true;
+                if (tile.IsLegalMove())
+                {
+                    moves.Add(tile);
+                }
             }
+
+            return moves;
         }
     }
 }

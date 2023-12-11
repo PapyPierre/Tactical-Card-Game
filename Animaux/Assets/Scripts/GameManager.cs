@@ -89,8 +89,10 @@ public class GameManager : Singleton<GameManager>
         currentPlayer = NextPlayerToPlay();
 
         currentPlayer.StartTurn(TurnNumber < 2);
-
+        
         _uiManager.SetActiveEndTurnBtn(false);
+        
+        _uiManager.ResetCardInHandScale();
     }
 
     private Player NextPlayerToPlay()

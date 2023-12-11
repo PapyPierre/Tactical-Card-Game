@@ -20,14 +20,29 @@ namespace UI
         {
             if (isSelected)
             {
-                transform.localScale = Vector3.Slerp(transform.localScale, initScale * 1.4f,
-                    (Time.time - startTime) / animDuration);
+                ScaleUp();
             }
             else
             {
-                transform.localScale = Vector3.Slerp(transform.localScale, initScale,
-                    (Time.time - startTime) / animDuration);
+               ScaleDown();
             }
+        }
+
+        private void ScaleUp()
+        {
+            transform.localScale = Vector3.Slerp(transform.localScale, initScale * 1.4f,
+                (Time.time - startTime) / animDuration);
+        }
+
+        private void ScaleDown()
+        {
+            transform.localScale = Vector3.Slerp(transform.localScale, initScale,
+                (Time.time - startTime) / animDuration);
+        }
+
+        public void ResetScale()
+        {
+            transform.localScale = initScale;
         }
 
         public void Select()

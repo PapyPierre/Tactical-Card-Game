@@ -1,5 +1,4 @@
 using Cards;
-using UI;
 using UnityEngine;
 
 namespace Board
@@ -9,9 +8,6 @@ namespace Board
       private MeshRenderer _meshRenderer; 
       public SpriteRenderer baseSR;
       public SpriteRenderer overlapSR;
-
-      [SerializeField] private Material baseMat;
-      [SerializeField] private Material overMat;
    
       [HideInInspector] public CardBehaviour cardOnThisTile;
 
@@ -23,6 +19,11 @@ namespace Board
       public bool IsLegalMove()
       {
          return cardOnThisTile == null;
+      }
+
+      public void SetMat(Material mat)
+      {
+         _meshRenderer.material = mat;
       }
    }
 }
