@@ -25,8 +25,6 @@ public class Player : MonoBehaviour
     public Color playerColor;
 
     [HideInInspector] public uint currentPoints;
-    
-    [HideInInspector] public bool isReadyToPlay;
 
     private void Start()
     {
@@ -64,12 +62,10 @@ public class Player : MonoBehaviour
     {
         selectedCardInHand = cardsInHand[i];
 
-        foreach (var cardInHand in _uiManager.cardInHandDisplays)
+        foreach (var cardInHandDisplay in _uiManager.cardsInHandDisplays)
         {
-            cardInHand.UnSelect();
+            cardInHandDisplay.UnSelect();
         }
-        
-        _uiManager.cardInHandDisplays[i].Select();
     }
     
     public void StartTurn(bool isFirstPlayerTurn)
@@ -87,7 +83,5 @@ public class Player : MonoBehaviour
         {
             Draw();
         }
-        
-        isReadyToPlay = true;
     }
 }

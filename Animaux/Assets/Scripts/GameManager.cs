@@ -55,8 +55,7 @@ public class GameManager : Singleton<GameManager>
     public void CheckToPlayCard(Vector2 touchPosOnScreen)
     {
         if (!gameHasStarted) return;
-        if (!currentPlayer.isReadyToPlay) return;
-        if (currentPlayer.selectedCardInHand == CardManager.Cards.None) return;
+        if (currentPlayer.hasPlayedACardThisTurn) return;
 
         Ray ray = _camera.ScreenPointToRay(touchPosOnScreen);
         
@@ -71,17 +70,6 @@ public class GameManager : Singleton<GameManager>
                 _boardManager.PlaceCard(selectedTile, currentPlayer.selectedCardInHand);
             }
         }
-    }
-
-    // Called from UI
-    public void SelectCardInHand(int i)
-    {
-        if (currentPlayer.hasPlayedACardThisTurn) return;
-
-        currentPlayer.SelectCardInHand(i);
-
-        _uiManager.ResetCardInHandColor();
-        _uiManager.cardInHandSprite[i].color = currentPlayer.playerColor;
     }
 
     public void StartNextPlayerTurn()
@@ -111,7 +99,7 @@ public class GameManager : Singleton<GameManager>
         }
         else
         {
-            foreach (var cardInHand in _uiManager.cardInHandDisplays)
+            foreach (var cardInHand in _uiManager.cardsInHandDisplays)
             {
                 cardInHand.UnSelect();
             }

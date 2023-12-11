@@ -11,8 +11,8 @@ namespace Board
         private UIManager _uiManager;
 
         [SerializeField] private GameObject tilePrefab;
-        [SerializeField] private Transform tilesParent;
-        [SerializeField] private Transform playedCardsParent;
+        public Transform tilesParent;
+        public Transform playedCardsParent;
 
         private const int boardSize = 6;
         public readonly Tile[,] tileMatrix = new Tile[boardSize, boardSize];

@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using Board;
 using Cards;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -10,15 +12,17 @@ namespace UI
     {
         private GameManager _gameManager;
         private CardManager _cardManager;
+        private BoardManager _boardManager;
+
+        [Space, SerializeField] private GameObject mainCanvas;
 
         [Space] public SwitchTurnMenu switchTurnMenu;
         [SerializeField] private GameObject endTurnBtn; 
 
-        [Space] public CardInfoDisplayer cardInfoDisplayer;
-        [SerializeField] private GameObject cardPreview;
+        [Header("Card Info Display")] public CardInfoDisplayer cardInfoDisplayer;
+        public float timeToShowCardInfo;
 
-        [Space] public List<Image> cardInHandSprite;
-        public List<CardInHandDisplay> cardInHandDisplays = new();
+        [Space] public List<CardInHandDisplay> cardsInHandDisplays = new();
 
         [Space] public TextMeshProUGUI turnNumberTMP;
         
@@ -41,6 +45,7 @@ namespace UI
         {
             _gameManager = GameManager.instance;
             _cardManager = CardManager.instance;
+            _boardManager = BoardManager.instance;
         }
 
         public void UpdateSliderPoints(int playerIndex, uint scoreValue)
@@ -88,21 +93,22 @@ namespace UI
 
         public void UpdateCardInHandSprites()
         {
-            foreach (var image in cardInHandSprite)
+            foreach (var card in cardsInHandDisplays)
             {
-                image.gameObject.SetActive(false);
+                card.gameObject.SetActive(false);
             }
 
             for (var i = 0; i < _gameManager.currentPlayer.cardsInHand.Count; i++)
             {
-                Image image = cardInHandSprite[i];
-                image.gameObject.SetActive(true);
+                var cardInHandDisplay = cardsInHandDisplays[i];
                 var cardIndex = (int)_gameManager.currentPlayer.cardsInHand[i];
                 Sprite newSprite = _cardManager.allCardsData[cardIndex].sprite;
-                image.sprite = newSprite;
+                
+                cardInHandDisplay.gameObject.SetActive(true);
+                cardInHandDisplay.image.sprite = newSprite;
             }
             
-            foreach (var cardInHand in cardInHandDisplays)
+            foreach (var cardInHand in cardsInHandDisplays)
             {
                 cardInHand.UnSelect();
             }
@@ -110,7 +116,7 @@ namespace UI
 
         public void ResetCardInHandScale()
         {
-            foreach (var card in cardInHandDisplays)
+            foreach (var card in cardsInHandDisplays)
             {
                 card.ResetScale();
             }
@@ -118,9 +124,9 @@ namespace UI
 
         public void ResetCardInHandColor()
         {
-            foreach (var image in cardInHandSprite)
+            foreach (var card in cardsInHandDisplays)
             {
-                image.color = Color.white;
+                card.image.color = Color.white;
             }
         }
 
@@ -133,6 +139,16 @@ namespace UI
         public void SetActiveEndTurnBtn(bool value)
         {
             endTurnBtn.SetActive(value);
+        }
+
+        public void ShowCardInfoDisplay(CardManager.Cards card)
+        {
+            _boardManager.tilesParent.gameObject.SetActive(false);
+            _boardManager.playedCardsParent.gameObject.SetActive(false);
+            mainCanvas.SetActive(false);
+            
+            cardInfoDisplayer.gameObject.SetActive(true);
+            cardInfoDisplayer.SetUpInfos(card);
         }
     }
 }

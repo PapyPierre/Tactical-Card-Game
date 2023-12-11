@@ -1,3 +1,4 @@
+using System;
 using Cards;
 using TMPro;
 using UnityEngine;
@@ -6,26 +7,23 @@ namespace UI
 {
     public class CardInfoDisplayer : MonoBehaviour
     {
-        [SerializeField] private GameObject parent;
+        [SerializeField] private GameObject cardPreview;
         
         [SerializeField] private TextMeshProUGUI cardNameTMP;
         [SerializeField] private TextMeshProUGUI cardInfoTMP;
         [SerializeField] private TextMeshProUGUI cardEffectTMP;
         [SerializeField] private TextMeshProUGUI cardDescriptionTMP;
 
-        private void Start()
+        private void Update()
         {
-            HideCardInfoDisplay();
+            //TODO faire qu'on puisse manipuler la preview en swipant 
         }
 
-        public void HideCardInfoDisplay()
+        public void SetUpInfos(CardManager.Cards card)
         {
-            parent.SetActive(false);
-        }
-        
-        public void ShowCardInfoDisplay(CardManager.Cards card)
-        {
-            parent.SetActive(true);
+            cardPreview.SetActive(true);
+            //TODO mettre à jour le mesh de la preview
+                
             var cardData = CardManager.instance.allCardsData[(int) card];
             string cardInfo = cardData.biome + " - " + cardData.category; 
             
