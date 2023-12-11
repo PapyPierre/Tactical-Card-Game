@@ -3913,7 +3913,6 @@ MonoBehaviour:
   switchTurnMenu: {fileID: 1066039028}
   endTurnBtn: {fileID: 1259047621}
   cardInfoDisplayer: {fileID: 1883389560}
-  cardPreview: {fileID: 1536044884}
   timeToShowCardInfo: 2
   cardsInHandDisplays:
   - {fileID: 915544182}
@@ -5100,6 +5099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40450fed50db20046b599cf2d30ac2a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cardPreview: {fileID: 1536044884}
   cardNameTMP: {fileID: 85134351}
   cardInfoTMP: {fileID: 1104006073}
   cardEffectTMP: {fileID: 1691930172}
