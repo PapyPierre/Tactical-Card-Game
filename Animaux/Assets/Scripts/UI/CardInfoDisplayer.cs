@@ -1,4 +1,3 @@
-using System;
 using Cards;
 using TMPro;
 using UnityEngine;
@@ -10,7 +9,8 @@ namespace UI
         [SerializeField] private GameObject cardPreview;
         
         [SerializeField] private TextMeshProUGUI cardNameTMP;
-        [SerializeField] private TextMeshProUGUI cardInfoTMP;
+        [SerializeField] private TextMeshProUGUI cardBiomeTMP;
+        [SerializeField] private TextMeshProUGUI cardCategoryTMP;
         [SerializeField] private TextMeshProUGUI cardEffectTMP;
         [SerializeField] private TextMeshProUGUI cardDescriptionTMP;
 
@@ -25,12 +25,19 @@ namespace UI
             //TODO mettre à jour le mesh de la preview
                 
             var cardData = CardManager.instance.allCardsData[(int) card];
-            string cardInfo = cardData.biome + " - " + cardData.category; 
             
             cardNameTMP.text =  cardData.cardFullName;
-            cardInfoTMP.text = cardInfo;
+            cardBiomeTMP.text = cardData.biome.ToString();
+
+            cardCategoryTMP.text = cardData.type is CardManager.CardType.Animal ? cardData.category.ToString() : cardData.type.ToString();
+            
             cardEffectTMP.text = cardData.cardEffect;
             cardDescriptionTMP.text = cardData.cardDescription;
+        }
+
+        private void OnDisable()
+        {
+            cardPreview.SetActive(false);
         }
     }
 }

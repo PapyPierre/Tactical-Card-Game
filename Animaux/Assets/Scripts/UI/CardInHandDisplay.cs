@@ -51,6 +51,7 @@ namespace UI
             {
                 _uiManager.ShowCardInfoDisplay(_gameManager.currentPlayer.cardsInHand[indexInHand]);
                 isHoldingOverElement = false;
+                holdTime = 0;
             }
         }
 

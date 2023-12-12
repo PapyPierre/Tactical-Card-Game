@@ -3,7 +3,6 @@ using Board;
 using Cards;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace UI
@@ -149,6 +148,15 @@ namespace UI
             
             cardInfoDisplayer.gameObject.SetActive(true);
             cardInfoDisplayer.SetUpInfos(card);
+        }
+        
+        public void HideCardInfoDisplay()
+        {
+            cardInfoDisplayer.gameObject.SetActive(false);
+
+            _boardManager.tilesParent.gameObject.SetActive(true);
+            _boardManager.playedCardsParent.gameObject.SetActive(true);
+            mainCanvas.SetActive(true);
         }
     }
 }
