@@ -14,11 +14,6 @@ namespace UI
         [SerializeField] private TextMeshProUGUI cardEffectTMP;
         [SerializeField] private TextMeshProUGUI cardDescriptionTMP;
 
-        private void Update()
-        {
-            //TODO faire qu'on puisse manipuler la preview en swipant 
-        }
-
         public void SetUpInfos(CardManager.Cards card)
         {
             cardPreview.SetActive(true);
