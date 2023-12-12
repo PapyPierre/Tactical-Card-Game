@@ -66,7 +66,7 @@ namespace Board
             
             Vector3 pos = new Vector3(tilePos.x, 0.1f, tilePos.z);
             
-            var posedCard = Instantiate(cardData.prefab, pos, Quaternion.identity, playedCardsParent).GetComponent<CardBehaviour>(); 
+            var posedCard = Instantiate(cardData.prefab, pos, cardData.prefab.transform.rotation, playedCardsParent).GetComponent<CardBehaviour>(); 
             posedCard.Init(tile, currentPlayer);
             
             // For Debug, waiting for 3D models

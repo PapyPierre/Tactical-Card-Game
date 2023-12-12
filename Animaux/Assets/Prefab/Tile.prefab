@@ -185,8 +185,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseSR: {fileID: 711670155742645178}
   overlapSR: {fileID: 8014209866939289160}
-  baseMat: {fileID: 2100000, guid: 413e15aa7f2aff74da762221a5de8de7, type: 2}
-  overMat: {fileID: 2100000, guid: 5a20a583ea804b74a95510b1aa83daee, type: 2}
   cardOnThisTile: {fileID: 0}
 --- !u!65 &8252558512556984243
 BoxCollider:
