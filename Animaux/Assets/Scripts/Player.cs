@@ -2,9 +2,7 @@
 using Cards;
 using NaughtyAttributes;
 using UI;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
@@ -23,7 +21,8 @@ public class Player : MonoBehaviour
     [HideInInspector] public bool hasPlayedACardThisTurn;
     
     public Color playerColor;
-
+    public Material playerMat;
+    
     [HideInInspector] public uint currentPoints;
 
     private void Start()
@@ -55,6 +54,12 @@ public class Player : MonoBehaviour
         
         cardsInHand.Add(deck[0]);
         deck.RemoveAt(0);
+        _uiManager.UpdateCardInHandSprites();
+    }
+    
+    public void AddCardInHand(CardManager.Cards card)
+    {
+        cardsInHand.Add(card);
         _uiManager.UpdateCardInHandSprites();
     }
 

@@ -47,6 +47,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: eeb4549c90391a34bb1043d9e36576a0, type: 2}
   myTile: {fileID: 0}
+  _meshRenderersToColor:
+  - {fileID: 1068889554974550480}
 --- !u!1 &9063622890781555918
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +149,12 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbabf3f341097bc45b9e4a710ec3056c, type: 3}
+--- !u!23 &1068889554974550480 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 5658162301425714028, guid: bbabf3f341097bc45b9e4a710ec3056c,
+    type: 3}
+  m_PrefabInstance: {fileID: 4634381869509421756}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3888701623203783010 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8477973815988931550, guid: bbabf3f341097bc45b9e4a710ec3056c,

@@ -20,7 +20,7 @@ MonoBehaviour:
   category: 8
   effectType: 1
   cardFullName: Wild Boar
-  cardEffect: Negates effects of all adjacent artificial or forest locations
+  cardEffect: Negates effects of all  adjacent artificial or forest locations
   cardDescription: description...
   pointsValue: 0
   negatedCardParam:

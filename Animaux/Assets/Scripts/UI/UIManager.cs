@@ -16,6 +16,7 @@ namespace UI
         [Space, SerializeField] private GameObject mainCanvas;
 
         [Space] public SwitchTurnMenu switchTurnMenu;
+        [SerializeField] private GameObject cancelTurnBtn; 
         [SerializeField] private GameObject endTurnBtn; 
 
         [Header("Card Info Display")] public CardInfoDisplayer cardInfoDisplayer;
@@ -135,6 +136,11 @@ namespace UI
             endTMP.text = text;
         }
 
+        public void SetActiveCancelTurnBtn(bool value)
+        {
+            cancelTurnBtn.SetActive(value);
+        }
+        
         public void SetActiveEndTurnBtn(bool value)
         {
             endTurnBtn.SetActive(value);

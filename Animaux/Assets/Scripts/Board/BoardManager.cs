@@ -17,9 +17,10 @@ namespace Board
         private const int boardSize = 6;
         public readonly Tile[,] tileMatrix = new Tile[boardSize, boardSize];
 
-        private Tile lastPlayedOnTile;
-        [SerializeField] private Material baseMat;
-        [SerializeField] private Material playedOnMat;
+        [HideInInspector] public Tile lastPlayedOnTile;
+        [SerializeField] private Material baseTileMat;
+        public Material effectOnTileMat;
+        public Material negatedTileMat;
 
         private void Start()
         {
@@ -62,6 +63,9 @@ namespace Board
             _uiManager.ResetCardInHandScale();
 
             Vector3 tilePos = tile.transform.position;
+            
+            //BUG THERE WAS A BUG HERE
+            Debug.Log((int) card);
             CardData cardData = CardManager.instance.allCardsData[(int) card];
             
             Vector3 pos = new Vector3(tilePos.x, 0.1f, tilePos.z);
@@ -73,15 +77,19 @@ namespace Board
             if (cardData.sprite)
             {
                 tile.baseSR.sprite = cardData.sprite;
-                tile.baseSR.color = currentPlayer.playerColor;
+                // tile.baseSR.color = currentPlayer.playerColor;
             }
             
             tile.cardOnThisTile = posedCard;
 
-            if (lastPlayedOnTile != null) lastPlayedOnTile.SetMat(baseMat);
+           // if (lastPlayedOnTile != null) lastPlayedOnTile.SetMat(lastPlayedOnTile.cardOnThisTile.owner.playerMat);
             lastPlayedOnTile = tile;
-            lastPlayedOnTile.SetMat(playedOnMat);
+            if (!lastPlayedOnTile.cardOnThisTile.IsNegate())
+            {
+                lastPlayedOnTile.SetMat(currentPlayer.playerMat);
+            }
             
+            _uiManager.SetActiveCancelTurnBtn(true);
             _uiManager.SetActiveEndTurnBtn(true);
             CheckIfBoardIsFull();
         }
@@ -122,6 +130,68 @@ namespace Board
             }
 
             return moves;
+        }
+
+        public void ResetTile(Tile tile)
+        {
+            tile.SetMat(tile.cardOnThisTile.IsNegate() ? effectOnTileMat : baseTileMat);
+
+            if (tile.cardOnThisTile.data.effectType == CardManager.EffectType.negate)
+            {
+                foreach (var adjacenteTile in tile.AdjacentTile())
+                {
+                    if (adjacenteTile.cardOnThisTile == null) continue;
+               
+                    if (adjacenteTile.cardOnThisTile.isNegateBy.Contains(tile.cardOnThisTile))
+                    {
+                        adjacenteTile.cardOnThisTile.isNegateBy.Remove(tile.cardOnThisTile);
+                    }
+                }
+                
+                _gameManager.UpdateEachPlayerPoints();
+                
+                UpdateTilesMat(tile.AdjacentTile());
+            }
+            
+            tile.baseSR.sprite = null;
+            
+            Destroy(tile.cardOnThisTile.gameObject);
+
+            tile.cardOnThisTile = null;
+        }
+
+        private void UpdateTilesMat(List<Tile> tiles)
+        {
+            foreach (var tile in tiles)
+            {
+                if (tile.cardOnThisTile != null)
+                {
+                    if (tile.cardOnThisTile.IsNegate())
+                    {
+                        tile.SetMat(negatedTileMat);
+                        continue;
+                    }
+                    else
+                    {
+                        tile.SetMat(tile.cardOnThisTile.owner.playerMat);
+                        continue;
+                    }
+                }
+                else
+                {
+                    foreach (var adjacenteTile in tile.AdjacentTile())
+                    {
+                        if (adjacenteTile.cardOnThisTile == null) continue;
+                        
+                        if (adjacenteTile.cardOnThisTile.data.effectType == CardManager.EffectType.negate)
+                        {
+                            tile.SetMat(effectOnTileMat);
+                        }
+                    }
+                }
+                
+                tile.SetMat(baseTileMat);
+            }
         }
     }
 }

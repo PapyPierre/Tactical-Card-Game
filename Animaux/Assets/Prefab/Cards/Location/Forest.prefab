@@ -79,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 1d6499c688cd7d641ac8dc4f25cef462, type: 2}
   myTile: {fileID: 0}
+  _meshRenderersToColor: []
 --- !u!1001 &2249322103737562389
 PrefabInstance:
   m_ObjectHideFlags: 0

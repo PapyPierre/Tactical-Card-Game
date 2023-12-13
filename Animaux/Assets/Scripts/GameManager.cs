@@ -91,6 +91,19 @@ public class GameManager : Singleton<GameManager>
     }
 
     // Called from UI
+    public void CancelLastMove()
+    {
+        if (_boardManager.lastPlayedOnTile == null || !currentPlayer.hasPlayedACardThisTurn) return;
+        
+        currentPlayer.hasPlayedACardThisTurn = false;
+        currentPlayer.AddCardInHand(_boardManager.lastPlayedOnTile.cardOnThisTile.data.thisCard);
+        _boardManager.ResetTile(_boardManager.lastPlayedOnTile);
+        _boardManager.lastPlayedOnTile = null;
+        _uiManager.SetActiveCancelTurnBtn(false);
+        _uiManager.SetActiveEndTurnBtn(false);
+    }
+    
+    // Called from UI
     public void EndOfTurn()
     {
         if (gameIsFinish)
@@ -103,6 +116,8 @@ public class GameManager : Singleton<GameManager>
             {
                 cardInHand.UnSelect();
             }
+            
+            _uiManager.SetActiveCancelTurnBtn(false);
             _uiManager.switchTurnMenu.Show(NextPlayerToPlay());
         }
     }

@@ -45,5 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   data: {fileID: 11400000, guid: 1347fd22aad058544aacdf3c276cac95, type: 2}
-  isNegateBy: []
   myTile: {fileID: 0}
+  _meshRenderersToColor: []

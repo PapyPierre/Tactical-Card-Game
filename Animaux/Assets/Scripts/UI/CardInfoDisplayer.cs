@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Cards;
 using TMPro;
 using UnityEngine;
@@ -7,7 +8,7 @@ namespace UI
     public class CardInfoDisplayer : MonoBehaviour
     {
         [SerializeField] private GameObject cardPreview;
-        
+        [SerializeField] private List<GameObject> allCardsPreviews;   
         [SerializeField] private TextMeshProUGUI cardNameTMP;
         [SerializeField] private TextMeshProUGUI cardBiomeTMP;
         [SerializeField] private TextMeshProUGUI cardCategoryTMP;
@@ -17,7 +18,7 @@ namespace UI
         public void SetUpInfos(CardManager.Cards card)
         {
             cardPreview.SetActive(true);
-            //TODO mettre à jour le mesh de la preview
+            allCardsPreviews[(int) card].SetActive(true);
                 
             var cardData = CardManager.instance.allCardsData[(int) card];
             
@@ -27,11 +28,19 @@ namespace UI
             cardCategoryTMP.text = cardData.type is CardManager.CardType.Animal ? cardData.category.ToString() : cardData.type.ToString();
             
             cardEffectTMP.text = cardData.cardEffect;
-            cardDescriptionTMP.text = cardData.cardDescription;
+         //   cardDescriptionTMP.text = cardData.cardDescription;
         }
 
         private void OnDisable()
         {
+            foreach (var go in allCardsPreviews)
+            {
+                if (go.activeSelf)
+                {
+                    go.SetActive(false);
+                }
+            }
+            
             cardPreview.SetActive(false);
         }
     }
