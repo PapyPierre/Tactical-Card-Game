@@ -1,5 +1,6 @@
 using Cards;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Board
 {
@@ -7,7 +8,7 @@ namespace Board
    {
       private MeshRenderer _meshRenderer; 
       public SpriteRenderer baseSR;
-      public SpriteRenderer overlapSR;
+      public Image displayImage;
    
       [HideInInspector] public CardBehaviour cardOnThisTile;
 

@@ -138,10 +138,70 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2519450576070651384, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.2748585
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519450576070651384, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 3.2748585
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519450576070651384, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 3.2748585
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519450576070651384, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.311
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519450576070651384, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519450576070651384, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.576
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519450576070651384, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.6142831
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519450576070651384, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.78908575
+      objectReference: {fileID: 0}
+    - target: {fileID: 2519450576070651384, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 104.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4492067236506751075, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5378176061936970746, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6722930089992905556, guid: 9bdc26066b8ae5246a1b311321366cde,
         type: 3}
       propertyPath: m_Name
       value: Wolf
+      objectReference: {fileID: 0}
+    - target: {fileID: 9128602357293841038, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
