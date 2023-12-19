@@ -64,8 +64,6 @@ namespace Board
 
             Vector3 tilePos = tile.transform.position;
             
-            //BUG THERE WAS A BUG HERE
-            Debug.Log((int) card);
             CardData cardData = CardManager.instance.allCardsData[(int) card];
             
             Vector3 pos = new Vector3(tilePos.x, 0.1f, tilePos.z);
@@ -77,17 +75,15 @@ namespace Board
             if (cardData.sprite)
             {
                 tile.baseSR.sprite = cardData.sprite;
-                // tile.baseSR.color = currentPlayer.playerColor;
             }
             
             tile.cardOnThisTile = posedCard;
-
-           // if (lastPlayedOnTile != null) lastPlayedOnTile.SetMat(lastPlayedOnTile.cardOnThisTile.owner.playerMat);
+            
             lastPlayedOnTile = tile;
-            if (!lastPlayedOnTile.cardOnThisTile.IsNegate())
-            {
-                lastPlayedOnTile.SetMat(currentPlayer.playerMat);
-            }
+            
+            lastPlayedOnTile.SetPointsImageColor(currentPlayer.playerColor);
+            lastPlayedOnTile.UpdatePointsDisplay();
+            UpdateTiles(lastPlayedOnTile.AdjacentTile());
             
             _uiManager.SetActiveCancelTurnBtn(true);
             _uiManager.SetActiveEndTurnBtn(true);
@@ -150,7 +146,7 @@ namespace Board
                 
                 _gameManager.UpdateEachPlayerPoints();
                 
-                UpdateTilesMat(tile.AdjacentTile());
+                UpdateTiles(tile.AdjacentTile());
             }
             
             tile.baseSR.sprite = null;
@@ -160,22 +156,21 @@ namespace Board
             tile.cardOnThisTile = null;
         }
 
-        private void UpdateTilesMat(List<Tile> tiles)
+        private void UpdateTiles(List<Tile> tiles)
         {
             foreach (var tile in tiles)
             {
                 if (tile.cardOnThisTile != null)
                 {
+                    tile.SetPointsImageColor(tile.cardOnThisTile.owner.playerColor);
+                    tile.UpdatePointsDisplay();
+
                     if (tile.cardOnThisTile.IsNegate())
                     {
                         tile.SetMat(negatedTileMat);
-                        continue;
                     }
-                    else
-                    {
-                        tile.SetMat(tile.cardOnThisTile.owner.playerMat);
-                        continue;
-                    }
+                    
+                    continue;
                 }
                 else
                 {
@@ -186,11 +181,14 @@ namespace Board
                         if (adjacenteTile.cardOnThisTile.data.effectType == CardManager.EffectType.negate)
                         {
                             tile.SetMat(effectOnTileMat);
+                            tile.SetPointsImageColor(Color.white);
+                            tile.UpdatePointsDisplay();
                         }
                     }
                 }
                 
-                tile.SetMat(baseTileMat);
+                tile.SetPointsImageColor(Color.white);
+                tile.UpdatePointsDisplay();
             }
         }
     }

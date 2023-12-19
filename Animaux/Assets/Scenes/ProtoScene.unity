@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.17812175, g: 0.22302292, b: 0.3051061, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1032,11 +1032,11 @@ MonoBehaviour:
     m_Right: 0
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 3
+  m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 275, y: 68}
-  m_Spacing: {x: 0, y: 0}
+  m_CellSize: {x: 350, y: 50}
+  m_Spacing: {x: 20, y: 0}
   m_Constraint: 2
   m_ConstraintCount: 1
 --- !u!1 &330585543
@@ -1157,7 +1157,7 @@ MonoBehaviour:
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
-  m_Antialiasing: 0
+  m_Antialiasing: 1
   m_AntialiasingQuality: 2
   m_StopNaN: 0
   m_Dithering: 0
@@ -1587,7 +1587,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.89
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -1626,7 +1626,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -1645,8 +1645,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 410087039}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
-  m_LocalPosition: {x: -1981.2, y: -4821.3, z: -7790.6}
+  m_LocalRotation: {x: -0.45202714, y: 0.22741544, z: -0.19353175, w: -0.840535}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3769,8 +3769,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 137.5, y: -95}
-  m_SizeDelta: {x: 275, y: 68}
+  m_AnchoredPosition: {x: 165, y: -95}
+  m_SizeDelta: {x: 350, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1104006072
 CanvasRenderer:
@@ -3835,7 +3835,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -4726,9 +4726,9 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 412.5, y: -95}
-  m_SizeDelta: {x: 275, y: 68}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 710, y: -70}
+  m_SizeDelta: {x: 350, y: 50}
+  m_Pivot: {x: 1, y: 1}
 --- !u!222 &1400895139
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4792,7 +4792,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -6304,15 +6304,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d84288c1b2d44e9b269375afe3efce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameHasStarted: 0
   gameIsFinish: 0
   pointRequiredToWin: 60
   players:
   - {fileID: 1839890556}
   - {fileID: 1083808658}
   currentPlayer: {fileID: 0}
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 1
 --- !u!1 &1883389559
 GameObject:
   m_ObjectHideFlags: 0
@@ -6759,6 +6757,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f44b2fbc7ce81b74bb28a420a8d2e5ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  holdTime: 0
+  fingerOverThisTile: {fileID: 0}
+  tileLayers:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!4 &1965560918
 Transform:
   m_ObjectHideFlags: 0
