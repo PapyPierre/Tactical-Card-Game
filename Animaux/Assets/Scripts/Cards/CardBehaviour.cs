@@ -24,6 +24,24 @@ namespace Cards
         protected virtual void OnPose()
         {
             myTile.cardOnThisTile = this;
+            
+            myTile.SetMat(BoardManager.instance.baseTileMat);
+            
+            foreach (var tile in myTile.AdjacentTile())
+            {
+                if (tile.cardOnThisTile == null) continue;
+              
+                if (tile.cardOnThisTile.data.effectType != CardManager.EffectType.negate) continue;
+                
+                foreach (var cardParam in tile.cardOnThisTile.data.negatedCardParam)
+                {
+                    if (myTile.Is(cardParam.biome, cardParam.type, cardParam.category))
+                    {
+                        Negate(tile.cardOnThisTile);
+                    }
+                }
+            }
+            
             GameManager.instance.UpdateEachPlayerPoints();
 
             foreach (var mr in _meshRenderersToColor)
@@ -50,22 +68,33 @@ namespace Cards
             List<Tile> adjacentTiles = myTile.AdjacentTile();
 
             foreach (var tile in adjacentTiles)
-            { 
-                if (tile.cardOnThisTile == null) tile.SetMat(BoardManager.instance.effectOnTileMat);
+            {
+                if (tile.cardOnThisTile == null)
+                {
+                    tile.SetMat(BoardManager.instance.effectOnTileMat);
+                    tile.baseSR.sprite = data.sprite;
+                }
             }
             
             foreach (var cardParam in data.negatedCardParam)
             {
                 foreach (var tile in adjacentTiles.WhichIs(cardParam.biome, cardParam.type, cardParam.category)) 
-                {
-                  tile.cardOnThisTile.Negate(this);
+                { 
+                    tile.cardOnThisTile.Negate(this);
                 }
             }
         }
 
         protected void Negate(CardBehaviour cardIsNegatesBy)
         {
-            isNegateBy.Add(cardIsNegatesBy);
+            Debug.Log(myTile.cardOnThisTile +" is negated !");
+
+            
+            if (!isNegateBy.Contains(cardIsNegatesBy))
+            {
+                isNegateBy.Add(cardIsNegatesBy);
+            }
+            
             myTile.SetMat(BoardManager.instance.negatedTileMat);
         }
 

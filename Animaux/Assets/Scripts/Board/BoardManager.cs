@@ -18,7 +18,7 @@ namespace Board
         public readonly Tile[,] tileMatrix = new Tile[boardSize, boardSize];
 
         [HideInInspector] public Tile lastPlayedOnTile;
-        [SerializeField] private Material baseTileMat;
+        public Material baseTileMat;
         public Material effectOnTileMat;
         public Material negatedTileMat;
 

@@ -114,7 +114,7 @@ public static class Helpers
         {
             if (tile.cardOnThisTile == null) continue;
             
-            // if the flags are set to nothing or if they contain the wanted values, they matche
+            // if the flags are set to nothing or if they contain the wanted values, they match
             bool biomeMatches = !biomeHasValue || BiomeFilter(tile.cardOnThisTile, biome.Value);
             bool typeMatches = !typeHasValue || TypeFilter(tile.cardOnThisTile, type.Value);
             bool categoryMatches = !categoryHasValue || CategoryFilter(tile.cardOnThisTile, category.Value);
@@ -127,6 +127,26 @@ public static class Helpers
         }
 
         return result;
+    }
+
+    // Return true if the card matches the given criteria
+    public static bool Is(this Tile tile, CardManager.CardBiome? biome, 
+        CardManager.CardType? type, CardManager.CardCategory? category)
+    {
+        if (tile.cardOnThisTile == null) return false;
+        
+        // Check if the flags are not equals to "nothing" in which case it should not be considered
+        bool biomeHasValue = biome != 0;
+        bool typeHasValue = type != 0;
+        bool categoryHasValue = category != 0;
+        
+        // if the flags are set to nothing or if they contain the wanted values, they match
+        bool biomeMatches = !biomeHasValue || BiomeFilter(tile.cardOnThisTile, biome.Value);
+        bool typeMatches = !typeHasValue || TypeFilter(tile.cardOnThisTile, type.Value);
+        bool categoryMatches = !categoryHasValue || CategoryFilter(tile.cardOnThisTile, category.Value);
+
+        // if all flags matches, return true
+        return biomeMatches && typeMatches && categoryMatches;
     }
 
     public static List<Tile> GetAllLinkedGivenCard(this Tile startTile, CardManager.Cards givenCard)

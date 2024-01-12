@@ -26,7 +26,7 @@ namespace Cards
 
         [ShowIf("CheckIfScore"), Space] public uint pointsValue;
 
-        [ShowIf("CheckIfNegate"), Space] public List<CardManager.CardParam > negatedCardParam;
+        [ShowIf("CheckIfNegate"), Space] public List<CardManager.CardParam> negatedCardParam;
         
         private bool CheckIfScore() => effectType == CardManager.EffectType.score;
         private bool CheckIfNegate() => effectType == CardManager.EffectType.negate;
