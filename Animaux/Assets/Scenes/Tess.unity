@@ -892,11 +892,41 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2501949991778515606, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0591a00185573ed4896c71c35e7b7e24, type: 2}
+    - target: {fileID: 2566830771747254694, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52cd8258e4bc52847a251b9f8816eb55, type: 2}
+    - target: {fileID: 3331192454013745440, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52cd8258e4bc52847a251b9f8816eb55, type: 2}
+    - target: {fileID: 5225603643085404569, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52cd8258e4bc52847a251b9f8816eb55, type: 2}
     - target: {fileID: 6722930089992905556, guid: 9bdc26066b8ae5246a1b311321366cde,
         type: 3}
       propertyPath: m_Name
       value: Wolf
       objectReference: {fileID: 0}
+    - target: {fileID: 7047093208586946075, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0591a00185573ed4896c71c35e7b7e24, type: 2}
+    - target: {fileID: 7843631415989833335, guid: 9bdc26066b8ae5246a1b311321366cde,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52cd8258e4bc52847a251b9f8816eb55, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
